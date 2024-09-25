@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
+// css 변수 생성 필요 ( color, font-size, font-weight 등)
+
 const GlobalStyle = createGlobalStyle`
     /* http://meyerweb.com/eric/tools/css/reset/
        v2.0 | 20110126
@@ -55,6 +57,19 @@ const GlobalStyle = createGlobalStyle`
         border-collapse: collapse;
         border-spacing: 0;
     }
-`
+
+    a {
+        color: black;
+        text-decoration: none;
+    }
+    
+    button {
+        display: block;
+        cursor: pointer;
+        border: none;
+        background: none;
+    }
+
+`;
 
 export default GlobalStyle;
