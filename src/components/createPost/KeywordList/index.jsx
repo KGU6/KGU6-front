@@ -1,5 +1,6 @@
 import { KeywordInput, KeywordListBox } from './KeywordList.style.js';
 import { useState } from 'react';
+import KeyWord from '../../common/KeyWord.jsx';
 
 const KeywordList = () => {
   const [input, setInput] = useState('');
@@ -32,19 +33,18 @@ const KeywordList = () => {
           setInput(e.target.value);
         }}
         onKeyUp={onKeyUpHandler}
+        maxLength={10}
       />
       <KeywordListBox>
         {keywordList.map((item, index) => (
-          <div key={index}>
-            {item}
-            <button
-              onClick={() => {
-                deleteKeyword(index);
-              }}
-            >
-              삭제
-            </button>
-          </div>
+          <button
+            key={index}
+            onClick={() => {
+              deleteKeyword(index);
+            }}
+          >
+            <KeyWord str={item} />
+          </button>
         ))}
       </KeywordListBox>
     </>

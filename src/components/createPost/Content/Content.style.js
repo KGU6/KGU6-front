@@ -2,44 +2,28 @@ import styled from 'styled-components';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
-export const Container = styled.div`
-  width: 100%;
-  height: 500px;
-
-  border: 1px solid gray;
-  border-radius: 5px;
+export const PlaceContainer = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 700;
+  & > svg {
+    margin-right: 8px;
+  }
 `;
-
-export const ShowModalButton = styled.button`
-  width: 50px;
-  height: 50px;
-  border: 1px solid gray;
-  border-radius: 5px;
-`;
-
-export const Modal = styled.div`
-  width: 100px;
-  border: 1px solid gray;
-  border-radius: 5px;
-`;
-
-export const ModalItem = styled.div``;
 
 export const Quill = styled(ReactQuill)`
-  height: 200px;
+  min-height: 150px;
+  max-height: 200px;
   width: 100%;
-  margin-top: 20px;
-  margin-bottom: 70px;
-  @media (max-width: 500px) {
-    margin-bottom: 100px;
-  }
+  margin-top: 10px;
+  margin-bottom: 80px;
 `;
 
 export const modules = {
   toolbar: {
     container: [
-      [{ header: [1, 2, 3, 4, 5, 6, false] }],
-      [{ font: [] }],
+      [{ header: [2, 3, 4, 5, 6, false] }],
       [{ align: [] }],
       ['bold', 'italic', 'underline', 'strike', 'blockquote'],
       [{ list: 'ordered' }, { list: 'bullet' }, 'link'],
@@ -87,7 +71,6 @@ export const modules = {
         { background: [] },
       ],
       ['image'],
-      ['clean'],
     ],
   },
 };

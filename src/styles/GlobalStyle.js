@@ -73,7 +73,19 @@ const GlobalStyle = createGlobalStyle`
         border: none;
         background: none;
     }
+    
+    input:focus {
+        outline: none;
+    }
 
+    :root{
+        // Colors
+        --color-main: #97DF47;
+        
+        --color-gray-100: #939393;
+        --color-gray-200: #BBBEC2;
+        --color-gray-300: #F3F4F6;
+    }
 `;
 
 export default GlobalStyle;
