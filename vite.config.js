@@ -8,7 +8,4 @@ export default defineConfig({
   resolve: {
     alias: [{ find: '@', replacement: '/src' }],
   },
-  optimizeDeps: {
-    exclude: ['js-big-decimal'],
-  },
 });

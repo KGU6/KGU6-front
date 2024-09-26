@@ -1,34 +1,13 @@
-import {
-  Container,
-  Modal,
-  ModalItem,
-  ShowModalButton,
-} from './Content.style.js';
 import { useState } from 'react';
+import 'react-quill/dist/quill.snow.css';
+import { modules, Quill } from './Content.style.js';
 
-const Content = () => {
-  const [contentList, setContentList] = useState([]);
-  const [focus, setFocus] = useState();
+function Content() {
+  const [value, setValue] = useState('');
 
   return (
-    <Container>
-      <ContentItem onClick={() => {}} isFocus={''} />
-    </Container>
+    <Quill theme='snow' value={value} onChange={setValue} modules={modules} />
   );
-};
+}
 
 export default Content;
-
-const ContentItem = ({ isFocus }) => {
-  return (
-    <div>
-      <ShowModalButton>+</ShowModalButton>
-      {isFocus && (
-        <Modal>
-          <ModalItem>이미지</ModalItem>
-          <ModalItem>장소</ModalItem>
-        </Modal>
-      )}
-    </div>
-  );
-};

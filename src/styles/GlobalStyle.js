@@ -37,6 +37,10 @@ const GlobalStyle = createGlobalStyle`
 
     body {
         line-height: 1;
+        ::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera*/
+        }
+
     }
 
     ol, ul {
