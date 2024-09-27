@@ -33,6 +33,6 @@ export const NavItem = styled(Link)`
   font-size: 12px;
 
   svg {
-    fill: ${(props) => (props.$isActive ? '#181F29' : '#B0B9C2')};
+    fill: ${(props) => (props.$isActive ? '#97DF47' : '#BBBEC2')};
   }
 `;
