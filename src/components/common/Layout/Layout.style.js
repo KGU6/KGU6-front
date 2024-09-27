@@ -15,4 +15,6 @@ export const Container = styled.div`
 export const Content = styled.div`
   height: 100%;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
 `;
