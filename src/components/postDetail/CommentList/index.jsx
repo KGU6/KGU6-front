@@ -1,15 +1,16 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import 'react-spring-bottom-sheet/dist/style.css';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 import {
-  CommentInput,
   CommentListContainer,
   CommentListItemContainer,
   Container,
 } from './CommentList.style.js';
 import PostHeaderInfo from '../PostHeaderInfo.jsx';
+import CommentInputBox from './CommentInputBox.jsx';
 
 const CommentList = ({ comments }) => {
+  const [commentList, setCommentList] = useState(comments);
   const sheetRef = useRef(null);
 
   return (
@@ -25,7 +26,7 @@ const CommentList = ({ comments }) => {
       ]}
       expandOnContentDrag
       // onSpringEnd={() => setPostListHeight(sheetRef.current?.height || 0)}
-      footer={<CommentInput placeholder={'댓글을 입력하세요'} />}
+      footer={<CommentInputBox />}
     >
       <Container>
         <CommentListContainer>

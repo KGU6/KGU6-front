@@ -19,13 +19,16 @@ export const CommentListItemContainer = styled.li`
   padding: 10px 0;
 `;
 
-export const CommentInput = styled.input`
-  // 해당 css 그대로 사용 시 따로 컴포넌트 분리 필요
+export const CommentInputBoxContainer = styled.div`
+  display: flex;
+
   width: 100%;
-
+  padding: 6px 10px;
   margin-bottom: 60px;
-
   border: 1px solid var(--color-gray-200);
   border-radius: 10px;
-  padding: 10px;
+
+  & > input {
+    width: 100%;
+  }
 `;
