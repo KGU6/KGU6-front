@@ -6,7 +6,8 @@ export const PlaceContainer = styled.div`
   display: flex;
   align-items: center;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: var(--weight-bold);
+
   & > svg {
     margin-right: 8px;
   }
