@@ -10,10 +10,16 @@ export const InfoBox = styled.div`
   }
 `;
 
-export const ArticleWrap = styled.div`
-  margin: 0 auto;
-  line-height: initial;
+export const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-grow: 1;
+  margin-bottom: 20px;
+`;
 
+export const ArticleWrap = styled.article`
+  line-height: initial;
   h1 {
     display: block;
     font-size: 2em;

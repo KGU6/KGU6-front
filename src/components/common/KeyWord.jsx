@@ -10,13 +10,13 @@ const Container = styled.div`
   box-sizing: content-box;
   display: flex;
   align-items: flex-end;
-  padding: 6px 16px;
+  padding: 4px 10px;
 
   margin-top: 5px;
   margin-right: 5px;
 
-  border: 1px solid var(--color-gray-200);
+  border: 1px solid var(--color-main);
   border-radius: 30px;
 
-  color: var(--color-gray-100);
+  color: var(--color-main);
 `;
