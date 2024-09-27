@@ -9,7 +9,7 @@ export const Container = styled.footer`
   padding: 10px 0;
   z-index: 999;
 
-  background-color: var(--color-white);
+  background-color: white;
   border-top: 1px solid var(--color-gray-300);
 `;
 
