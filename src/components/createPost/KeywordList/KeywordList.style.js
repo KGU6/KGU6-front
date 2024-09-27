@@ -13,5 +13,5 @@ export const KeywordListBox = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 `;

@@ -37,6 +37,7 @@ const CommentList = ({ comments }) => {
               time={'2024.09.25'}
             />
             안녕하세요
+            <button>답글달기</button>
           </CommentListItemContainer>
         </CommentListContainer>
       </Container>
