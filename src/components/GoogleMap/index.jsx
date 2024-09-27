@@ -16,7 +16,13 @@ const center = {
   lat: 37.5665,
   lng: 126.978,
 };
-
+const myStyles = [
+  {
+    featureType: 'poi',
+    elementType: 'labels',
+    stylers: [{ visibility: 'off' }],
+  },
+];
 const GoogleMapCP = () => {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
@@ -44,16 +50,14 @@ const GoogleMapCP = () => {
       zoom={15}
       onLoad={onLoad}
       onUnmount={onUnmount}
-      options={{ disableDefaultUI: true }}
+      options={{ disableDefaultUI: true, styles: myStyles }}
     >
       {/* Child components, such as markers, info windows, etc. */}
       {/* Child components, such as markers, info windows, etc. */}
-      <MarkerF
-        position={center}
-        icon={
-          'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
-        }
-      ></MarkerF>
+      <MarkerF position={center} icon={{ url: '/good-icon.svg' }} />
+      <MarkerF position={center} icon={{ url: '/not-bad-icon.svg' }} />
+      <MarkerF position={center} icon={{ url: '/bad-icon.svg' }} />
+      <MarkerF position={center} icon={{ url: '/vite.svg' }} />
     </GoogleMap>
   ) : (
     <></>
