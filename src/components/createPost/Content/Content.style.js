@@ -13,6 +13,30 @@ export const PlaceContainer = styled.div`
   }
 `;
 
+export const IconBox = styled.div`
+  margin-left: auto;
+  padding: 6px;
+
+  display: flex;
+  align-items: center;
+
+  border-radius: 20px;
+`;
+
+export const IconButton = styled.button`
+  background-color: ${(props) => props.$isActive && '#DFF6C5'};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  width: 30px;
+  height: 30px;
+
+  & > svg {
+    width: 20px;
+  }
+`;
+
 export const Quill = styled(ReactQuill)`
   min-height: 150px;
   max-height: 200px;

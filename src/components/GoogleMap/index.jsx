@@ -23,7 +23,7 @@ const myStyles = [
     stylers: [{ visibility: 'off' }],
   },
 ];
-const GoogleMapCP = () => {
+const GoogleMapCP = ({ placeList }) => {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: GOOGLE_API_KEY,
@@ -54,10 +54,25 @@ const GoogleMapCP = () => {
     >
       {/* Child components, such as markers, info windows, etc. */}
       {/* Child components, such as markers, info windows, etc. */}
-      <MarkerF position={center} icon={{ url: '/good-icon.svg' }} />
-      <MarkerF position={center} icon={{ url: '/not-bad-icon.svg' }} />
-      <MarkerF position={center} icon={{ url: '/bad-icon.svg' }} />
-      <MarkerF position={center} icon={{ url: '/vite.svg' }} />
+      {placeList.map((place, index) => (
+        <MarkerF
+          key={index}
+          position={center}
+          icon={{ url: '/good-icon.svg' }}
+        />
+      ))}
+      <MarkerF
+        position={center}
+        icon={{ url: '/src/assets/icons/good-icon.svg' }}
+      />
+      <MarkerF
+        position={center}
+        icon={{ url: '/src/assets/icons/not-bad-icon.svg' }}
+      />
+      <MarkerF
+        position={center}
+        icon={{ url: '/src/assets/icons/bad-icon.svg' }}
+      />
     </GoogleMap>
   ) : (
     <></>
