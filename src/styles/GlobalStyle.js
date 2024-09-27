@@ -137,10 +137,23 @@ const GlobalStyle = createGlobalStyle`
     :root{
         // Colors
         --color-main: #97DF47;
+        --color-sub-main: #DFF6C5;
         
+        --color-white: #FFFFFF;
+        --color-white-200: #F2F3F3;
+        --color-white-300: #F8F8F8;
+
         --color-gray-100: #939393;
-        --color-gray-200: #BBBEC2;
-        --color-gray-300: #F3F4F6;
+        --color-gray-200: #BBBEC2; // 아이콘
+        --color-gray-300: #B4B8BD; // 박스 border, 비활성화 텍스트
+        --color-gray-400: #8C8D90; // 날씨, 장소
+        --color-gray-500: #7A7C7E; // 활성화텍스트
+        --color-gray-600: #6B717A; // 검색아이콘
+        --color-gray-700: #4F5153; // 여행 본문 텍스트
+        
+        --color-black: #19191B;
+        
+        //--color-gray-300: #F3F4F6;
 
         // Font size
         --font-large: 26px;
