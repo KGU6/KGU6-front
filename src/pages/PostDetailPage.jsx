@@ -16,7 +16,7 @@ const PostDetailPage = () => {
     <>
       <Title>시드니에서의 하루, 해변부터 도시까지</Title>
       <PostHeaderInfo profileImg={''} name={'이준석'} time={'2024.09.25'} />
-      <GoogleMapCP />
+      <GoogleMapCP placeList={[]} />
       <Section>
         <Article place={'본다이 비치'}>
           {`<p>` +
