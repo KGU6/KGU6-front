@@ -223,8 +223,8 @@ const SocialLogin = styled.div`
 
 const SocialButton = styled.button`
   background: ${({ color }) => color || "#ccc"};
-  width: 47px !important;   // 47px로 강제 고정
-  height: 47px !important;  // 47px로 강제 고정
+  width: 47px !important;
+  height: 47px !important;
   border-radius: 50%;
   border: none;
   cursor: pointer;
