@@ -1,6 +1,5 @@
-// import React from 'react';
+import { useEffect, useState } from 'react';
 import { GoogleMap, MarkerF, useJsApiLoader } from '@react-google-maps/api';
-import { useState } from 'react';
 
 const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 
@@ -23,6 +22,7 @@ const myStyles = [
     stylers: [{ visibility: 'off' }],
   },
 ];
+
 const GoogleMapCP = ({ placeList }) => {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
@@ -31,48 +31,44 @@ const GoogleMapCP = ({ placeList }) => {
 
   const [map, setMap] = useState(null);
 
-  const onLoad = function callback(map) {
-    // This is just an example of getting and using the map instance!!! don't just blindly copy!
-    // const bounds = new window.google.maps.LatLngBounds(center);
-    // map.fitBounds(bounds);
-
-    setMap(map);
-  };
-
-  const onUnmount = function callback(map) {
-    setMap(null);
-  };
+  useEffect(() => {
+    if (map && placeList.length > 0) {
+      const bounds = new window.google.maps.LatLngBounds();
+      placeList.forEach((place) => {
+        bounds.extend(place.location);
+      });
+      map.fitBounds(bounds);
+    }
+  }, [map, placeList]);
 
   return isLoaded ? (
     <GoogleMap
-      mapContainerStyle={containerStyle}
       center={center}
+      mapContainerStyle={containerStyle}
       zoom={15}
-      onLoad={onLoad}
-      onUnmount={onUnmount}
+      onLoad={(map) => {
+        setMap(map);
+      }}
+      onUnmount={() => {
+        setMap(null);
+      }}
       options={{ disableDefaultUI: true, styles: myStyles }}
     >
-      {/* Child components, such as markers, info windows, etc. */}
-      {/* Child components, such as markers, info windows, etc. */}
-      {placeList.map((place, index) => (
-        <MarkerF
-          key={index}
-          position={center}
-          icon={{ url: '/good-icon.svg' }}
-        />
-      ))}
-      <MarkerF
-        position={center}
-        icon={{ url: '/src/assets/icons/good-icon.svg' }}
-      />
-      <MarkerF
-        position={center}
-        icon={{ url: '/src/assets/icons/not-bad-icon.svg' }}
-      />
-      <MarkerF
-        position={center}
-        icon={{ url: '/src/assets/icons/bad-icon.svg' }}
-      />
+      {placeList.length > 0 &&
+        placeList.map((place, index) => (
+          <MarkerF
+            key={index}
+            position={place.location}
+            icon={{
+              url:
+                place.status === 'GOOD'
+                  ? '/src/assets/icons/good-icon.svg'
+                  : place.status === 'NOT_BAD'
+                    ? '/src/assets/icons/not-bad-icon.svg'
+                    : '/src/assets/icons/bad-icon.svg',
+            }}
+          />
+        ))}
     </GoogleMap>
   ) : (
     <></>
