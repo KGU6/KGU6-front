@@ -141,6 +141,23 @@ const GlobalStyle = createGlobalStyle`
         --color-gray-100: #939393;
         --color-gray-200: #BBBEC2;
         --color-gray-300: #F3F4F6;
+
+        // Font size
+        --font-large: 26px;
+        --font-medium: 20px;
+        --font-regular: 16px;
+        --font-small: 14px;
+        --font-semi-micro: 12px;
+        --font-micro: 10px;
+
+        // Font weight
+        --weight-extra-bold: 800;
+        --weight-bold: 700;
+        --weight-semi-bold: 600;
+        --weight-medium: 500;
+        --weight-regular: 400;
+        --weight-light: 300;
+
     }
 `;
 
