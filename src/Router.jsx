@@ -9,7 +9,7 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
-          <Route path={'/a'} element={<CreatePostPage />} />
+          <Route path={'/create-post'} element={<CreatePostPage />} />
           <Route path={'/'} element={<PostDetailPage />} />
         </Route>
       </Routes>

@@ -150,6 +150,7 @@ const GlobalStyle = createGlobalStyle`
         --color-gray-500: #7A7C7E; // 활성화텍스트
         --color-gray-600: #6B717A; // 검색아이콘
         --color-gray-700: #4F5153; // 여행 본문 텍스트
+        --color-gray-800: #ACACAC; // 답글 달기
         
         --color-black: #19191B;
         

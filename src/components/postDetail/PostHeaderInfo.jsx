@@ -1,12 +1,14 @@
-import { InfoBox } from './postDetail.style.js';
+import { Date, InfoBox } from './postDetail.style.js';
+import BasicUserIcon from '@/assets/icons/basic-user-icon.svg?react';
 
 const PostHeaderInfo = ({ profileImg, name, time }) => {
   return (
     <InfoBox>
       <div>
-        <img src={profileImg} /> {name}
+        {profileImg ? <img src={profileImg} /> : <BasicUserIcon />}
+        {name}
       </div>
-      <div>{time}</div>
+      <Date>{time}</Date>
     </InfoBox>
   );
 };

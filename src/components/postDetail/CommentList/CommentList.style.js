@@ -16,15 +16,42 @@ export const CommentListContainer = styled.ul`
 `;
 
 export const CommentListItemContainer = styled.li`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   padding: 10px 0;
+
+  color: var(--color-gray-700);
+  font-weight: var(--weight-regular);
+
+  & > button {
+    margin-right: auto;
+
+    color: var(--color-gray-800);
+    font-size: var(--font-semi-micro);
+    font-weight: var(--weight-light);
+  }
 `;
 
 export const CommentInputBoxContainer = styled.div`
   display: flex;
-
   width: 100%;
-  padding: 6px 10px;
   margin-bottom: 60px;
+
+  & > svg {
+    width: 44px;
+    height: 44px;
+
+    margin-right: 10px;
+  }
+`;
+
+export const CommentInputWrap = styled.div`
+  width: 100%;
+
+  display: flex;
+  padding: 6px 10px;
+
   border: 1px solid var(--color-gray-200);
   border-radius: 10px;
 
