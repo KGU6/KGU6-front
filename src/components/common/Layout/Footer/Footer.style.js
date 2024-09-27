@@ -10,7 +10,7 @@ export const Container = styled.footer`
   z-index: 999;
 
   background-color: var(--color-white);
-  border-top: 1px solid var(--color-gray-300);
+  border-top: 1px solid #f3f4f6;
 `;
 
 export const Nav = styled.nav`
