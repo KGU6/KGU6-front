@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+// import React from 'react';
 import { GoogleMap, MarkerF, useJsApiLoader } from '@react-google-maps/api';
+import { useState } from 'react';
 
 const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 
