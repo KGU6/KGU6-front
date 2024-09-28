@@ -47,9 +47,3 @@ const SearchInput = ({ handleSearch }) => {
 };
 
 export default SearchInput;
-
-// handleSearch 예시
-// const a = (latitude, longitude, placeName, placeAddress) => {
-//   구현할 기능
-//   console.log(latitude, longitude, placeName, placeAddress);
-// };

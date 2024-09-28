@@ -19,6 +19,7 @@ export const API_PATH = {
     },
   },
   TRAVERLOG: {
+    GET: VITE_SEVER_URL + '/api/core/travelog/:travelogId',
     POST: VITE_SEVER_URL + '/api/core/travelog',
   },
 };
