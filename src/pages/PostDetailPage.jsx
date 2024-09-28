@@ -38,7 +38,7 @@ const PostDetailPage = () => {
   }
 
   const placeList = content.placeContent.map((item) => {
-    return { location: { lat: item.lat, lng: item.lng } };
+    return { location: { lat: item.lat, lng: item.lng }, status: item.cloud };
   });
 
   return (

@@ -182,10 +182,26 @@ const MyPageScreen = () => {
         // onSpringEnd={() => setPostListHeight(sheetRef.current?.height || 0)}
       >
         <CardList isMyPage={true}>
-          <TravelCard />
-          <TravelCard />
-          <TravelCard />
-          <TravelCard />
+          <TravelCard
+            imageUrl={
+              'https://images-ext-1.discordapp.net/external/BeBe6_Pq1zOWZQ60STjgLgFbRBlY5Go0XvbpSBtw-Wo/%3FExpires%3D1728259200%26Key-Pair-Id%3DAPKAQ4GOSFWCVNEHN3O4%26Signature%3DUi-bntFO-ivjFCLkYUpjmtGbw6aq6yR9kNCai94aIPk4bP2dslReXlUZkieiouBQzomqEvIyFwEEI2S-d4kjWu5zEqENCS4mL9t~6IE8GDtfcp72rIEvMk6ZshfGzLjxmnixe5OzEn9YlYaUeyrOs59EjKHoZSGxOU7N8XrsQ-jrM5YZATR4MbxKLI6721R6e5tvFF1JpG5M3Xb6YU0YlQNBq0cvHkGzufB~5mD45T8uK4z4qLWEWz7Ulw-tSqilP01tKYCNocPMlXrsLi923r78EVLhTcIvq0BghJsRLd89RzuIOw~ht3TJzgfid8H8i5I8R-lnMuvscQOFMQj0yA__/https/s3-alpha-sig.figma.com/img/8cdf/736c/3253b2be1e0c373ea48932986922a83b?format=webp&width=1792&height=1194'
+            }
+          />
+          <TravelCard
+            imageUrl={
+              'https://media.discordapp.net/attachments/1287383888468906089/1289709108567736432/image_1.png?ex=66f9ceb5&is=66f87d35&hm=f82b2e359e91a13e1d2f353e975bdd5c37ad59748b778800c5fe6afc0c5b1004&=&format=webp&quality=lossless&width=452&height=476'
+            }
+          />
+          <TravelCard
+            imageUrl={
+              'https://media.discordapp.net/attachments/1287383888468906089/1289709108982710393/image_5.png?ex=66f9ceb5&is=66f87d35&hm=91c40f5fdd5b47597a1dc2ae07561f560a33e93d4cd49a94e37ffdf4f872ddd9&=&format=webp&quality=lossless&width=416&height=440'
+            }
+          />
+          <TravelCard
+            imageUrl={
+              'https://media.discordapp.net/attachments/1287383888468906089/1289709109243019304/image_6.png?ex=66f9ceb5&is=66f87d35&hm=fd80aa247b65ee4debf92e0911f5dcda53410953a2911ccc282ddafb4798937f&=&format=webp&quality=lossless&width=454&height=444'
+            }
+          />
         </CardList>
       </BottomSheet>
 

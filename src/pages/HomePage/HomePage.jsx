@@ -5,8 +5,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 // icon
-import { IoSearchOutline } from "react-icons/io5";
-import { FaRegBell } from "react-icons/fa6";
+import { IoSearchOutline } from 'react-icons/io5';
+import { FaRegBell } from 'react-icons/fa6';
 import HomeSwiper from '../../components/homepage/HomeSwiper';
 import TagSwiper from '../../components/homepage/TagSwiper';
 import { FreeMode } from 'swiper/modules';
@@ -21,7 +21,6 @@ import keywordimg2 from '../../assets/homepage/keywordimg/keywordimg2.svg';
 import keywordimg3 from '../../assets/homepage/keywordimg/keywordimg3.svg';
 import keywordimg4 from '../../assets/homepage/keywordimg/keywordimg4.svg';
 
-
 const HomePage = () => {
   const [selectedTags, setSelectedTags] = useState([]);
   const navigate = useNavigate();
@@ -35,27 +34,37 @@ const HomePage = () => {
   return (
     <Container>
       <SearchBarWrapper>
-        <IoSearchOutline className="search-icon" />
-        <SearchBar onClick={goToSearch} placeholder="여행지, 키워드를 입력해 보세요" />
+        <IoSearchOutline className='search-icon' />
+        <SearchBar
+          onClick={goToSearch}
+          placeholder='여행지, 키워드를 입력해 보세요'
+        />
         <FaRegBell className='bell-icon' />
       </SearchBarWrapper>
 
-      <SectionTitle><span className='greenText'>여행의 순간</span>을 함께 느껴보세요</SectionTitle>
-      <div className='SwiperWrapper'><HomeSwiper /></div>
+      <SectionTitle>
+        <span className='greenText'>여행의 순간</span>을 함께 느껴보세요
+      </SectionTitle>
+      <div className='SwiperWrapper'>
+        <HomeSwiper />
+      </div>
 
-      <RecommendPlace/>
-      <HotPlaceGrid/>
+      <RecommendPlace />
+      <HotPlaceGrid />
 
       <KeywordSection>
         <SubTitle className='keywordTitle'>#키워드별 여행기</SubTitle>
         <div className='SwiperWrapper'>
-          <TagSwiper selectedTags={selectedTags} setSelectedTags={setSelectedTags} />
+          <TagSwiper
+            selectedTags={selectedTags}
+            setSelectedTags={setSelectedTags}
+          />
         </div>
         <div className='SwiperWrapper'>
           <Swiper
             slidesPerView={1.6}
             spaceBetween={4} // 각 슬라이드 간 간격
-            className="tagImgSwiper"
+            className='tagImgSwiper'
             freeMode={true}
             modules={[FreeMode]}
           >
@@ -75,30 +84,27 @@ export default HomePage;
 
 // styled-components
 const Container = styled.div`
-  width: 100%;
   display: flex;
   position: relative;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
   color: black;
   text-align: center;
 
   .SwiperWrapper {
-    width: 100vw; 
+    width: 100%;
     min-height: 390px;
     position: relative;
   }
 
-
   .sectionLine {
     width: 100%;
     height: 5px;
-    color: #EFF1F4;
+    color: #eff1f4;
   }
 
-  .circleSwiper{
-    width:100%;
+  .circleSwiper {
+    width: 100%;
   }
 `;
 
@@ -120,7 +126,7 @@ const SearchBarWrapper = styled.div`
     position: absolute;
     right: 0;
     font-size: 24px;
-    color: #BBBEC2;
+    color: #bbbec2;
   }
 `;
 
@@ -129,7 +135,7 @@ const SearchBar = styled.input`
   height: 40px;
   position: relative;
   left: 32px;
-  background-color: #F2F3F3;
+  background-color: #f2f3f3;
   padding: 12px 12px 12px 36px;
   border-radius: 22px;
 `;
@@ -145,21 +151,21 @@ const SectionTitle = styled.h2`
   margin-bottom: 24px;
 
   .greenText {
-    color: #97DF47;
+    color: #97df47;
   }
 `;
 
 export const SubTitle = styled.h3`
   width: 100%;
-  height:28px;
+  height: 28px;
   font-size: 20px;
   line-height: 28px;
   text-align: left;
   font-weight: var(--weight-bold);
   margin-top: 30px;
   margin-bottom: 12px;
-  &.keywordTitle{
-    margin-bottom:0;
+  &.keywordTitle {
+    margin-bottom: 0;
   }
 `;
 
@@ -182,7 +188,7 @@ const KeywordSection = styled.div`
 const KeywordImg = styled.div`
   width: 232px;
   height: 162px;
-  background-image: url(${props => props.img});
+  background-image: url(${(props) => props.img});
   background-size: cover;
   background-position: center;
   display: flex;

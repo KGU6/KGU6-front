@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import SortPopup from '../../components/SearchPage/SortPopup';
 import DownArrowIcon from '../../assets/icons/down-arrow.svg?react';
@@ -53,7 +53,7 @@ const DownArrow = styled(DownArrowIcon)`
 const SearchResultScreen = () => {
   const location = useLocation().state;
   const [placeList, setPlaceList] = useState([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     (async () => {
       const response = await searchApi(location.placeName);
@@ -101,13 +101,14 @@ const SearchResultScreen = () => {
       <CardList isMyPage={false}>
         {placeList?.length > 0 &&
           placeList.map((item, index) => (
-            <TravelCard
-              key={index}
-              date={item.createdAt}
-              location={item.placeName}
-              imageUrl={item.imageUrl}
-              title={item.title}
-            />
+            <div key={index} onClick={() => navigate('/post/' + item.id)}>
+              <TravelCard
+                date={item.createdAt}
+                location={item.placeName}
+                imageUrl={item.imageUrl}
+                title={item.title}
+              />
+            </div>
           ))}
       </CardList>
     </SearchContainer>
