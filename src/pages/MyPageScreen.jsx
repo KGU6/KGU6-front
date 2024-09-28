@@ -4,6 +4,8 @@ import Footer from "../components/common/Layout/Footer";
 import { BottomSheet } from "react-spring-bottom-sheet";
 import TravelCard from "../components/MyPage/TravelCard";
 import { getProfile } from "../api/userApi";
+import LocationIconSrc from "@/assets/icons/location.svg";
+
 
 const GradientBackground = styled.div`
   height: 100vh;

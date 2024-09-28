@@ -2,9 +2,8 @@ import { KeywordInput, KeywordListBox } from './KeywordList.style.js';
 import { useState } from 'react';
 import KeyWord from '../../common/KeyWord.jsx';
 
-const KeywordList = () => {
+const KeywordList = ({ keywordList, setKeywordList }) => {
   const [input, setInput] = useState('');
-  const [keywordList, setKeywordList] = useState([]);
 
   const onKeyUpHandler = (e) => {
     if (

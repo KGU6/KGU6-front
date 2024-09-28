@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Title = styled.h2`
   margin: 20px 0;
@@ -35,6 +35,23 @@ export const Section = styled.section`
   gap: 10px;
   flex-grow: 1;
   margin-bottom: 20px;
+`;
+
+export const LikesBox = styled.div`
+  display: flex;
+  padding-bottom: 40px;
+  gap: 10px;
+`;
+
+export const HeartIconBtn = styled.button`
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  display: inline-block;
+
+  svg {
+    fill: ${(props) => (props.$liked ? "#FFAEAD" : "#BBBEC2")};
+  }
 `;
 
 export const ArticleWrap = styled.article`
