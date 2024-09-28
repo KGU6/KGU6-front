@@ -108,7 +108,28 @@ const Card = styled.div`
   flex-direction: column;
   justify-content: center;
   transition: height 0.3s ease-in-out;
+  overflow: hidden; /* 자식 요소가 부모 경계를 넘지 않도록 설정 */
+
+  /* 어두운 오버레이 추가 */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.25); /* 배경을 살짝 어둡게 만듦 */
+    z-index: 1; /* 오버레이가 배경 이미지 위에 오도록 설정 */
+    border-radius: 20px; /* 오버레이의 모서리도 둥글게 설정 */
+  }
+
+  /* 자식 요소를 오버레이 위로 올림 */
+  span, p {
+    position: relative;
+    z-index: 2;
+  }
 `;
+
 
 const CardTitle = styled.span`
   position: relative;
