@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const KeywordInput = styled.input`
   width: 100%;
@@ -13,5 +13,5 @@ export const KeywordListBox = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 `;
