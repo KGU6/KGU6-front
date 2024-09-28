@@ -3,14 +3,14 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0 0 20px 0;
+  margin: -6px 0 20px 0;
 `;
 
 export const Label = styled.label`
-  padding: 10px 16px;
+  padding: 8px 14px;
   color: white;
 
-  border-radius: 30px;
+  border-radius: 10px;
   background-color: var(--color-main);
 `;
 
@@ -34,15 +34,13 @@ export const Image = styled.div`
 `;
 export const ButtonBox = styled.div`
   display: flex;
-  justify-content: flex-end;
-  margin-left: auto;
   gap: 10px;
 
   & > button {
-    padding: 10px 16px;
+    padding: 8px 14px;
     color: white;
 
-    border-radius: 30px;
+    border-radius: 10px;
     background-color: var(--color-gray-200);
   }
 `;
