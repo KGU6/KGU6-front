@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import 'react-spring-bottom-sheet/dist/style.css';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 import {
@@ -9,9 +9,8 @@ import {
 import PostHeaderInfo from '../PostHeaderInfo.jsx';
 import CommentInputBox from './CommentInputBox.jsx';
 
-const CommentList = ({ comments }) => {
-  const [commentList, setCommentList] = useState(comments);
-  const [newcomment, setNewComment]= useState(null);
+const CommentList = () => {
+  const [newcomment, setNewComment] = useState(null);
   const sheetRef = useRef(null);
 
   const addComment = (newComment) => {
@@ -44,7 +43,6 @@ const CommentList = ({ comments }) => {
       <Container>
         <CommentListContainer>
           <CommentListItemContainer>
-
             <PostHeaderInfo
               profileImg={''}
               name={'이준석'}
@@ -52,16 +50,17 @@ const CommentList = ({ comments }) => {
             />
             안녕하세요
             <button>답글달기</button>
-            {newcomment&&
-            <>
-              <PostHeaderInfo
-              profileImg={''}
-              name={'익명 사용자'}
-              time={'2024.09.29'}
-              />
+            {newcomment && (
+              <>
+                <PostHeaderInfo
+                  profileImg={''}
+                  name={'익명 사용자'}
+                  time={'2024.09.29'}
+                />
                 {newcomment.content}
-              <button>답글달기</button>
-            </>}
+                <button>답글달기</button>
+              </>
+            )}
           </CommentListItemContainer>
         </CommentListContainer>
       </Container>
@@ -70,7 +69,3 @@ const CommentList = ({ comments }) => {
 };
 
 export default CommentList;
-
-const CommentListItem = () => {
-  return <CommentListItemContainer>안녕하세요</CommentListItemContainer>;
-};

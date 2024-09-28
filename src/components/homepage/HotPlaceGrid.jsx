@@ -1,19 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { SubTitle } from '../../pages/HomePage/HomePage';
-// testimg
-import { FaLocationDot } from "react-icons/fa6";
+import { FaLocationDot } from 'react-icons/fa6';
 import { Hplace } from '../../api/Homepage/Hplace';
 
 const HotPlaceGrid = () => {
-  const [apiData, setApiData] = useState([]);
   const [placeData, setPlaceData] = useState([]);
 
   useEffect(() => {
     // API로부터 데이터를 받아와 `placeData`를 업데이트합니다.
     const fetchData = async () => {
       const data = await Hplace();
-      setApiData(data.travelogs);  // API 데이터를 상태에 저장
 
       // `placeData` 업데이트: `travelog` 배열의 `imageUrl`을 사용
       const updatedPlaceData = data.travelogs.map((item, index) => ({
@@ -37,7 +34,9 @@ const HotPlaceGrid = () => {
             <PlaceImgBox img={data.img} />
             <PlaceText>
               <p>{data.Title}</p>
-              <span><FaLocationDot /> {data.sub}</span>
+              <span>
+                <FaLocationDot /> {data.sub}
+              </span>
             </PlaceText>
           </PlaceItem>
         ))}
@@ -51,7 +50,7 @@ export default HotPlaceGrid;
 const PlaceImgBox = styled.div`
   width: 168px;
   height: 162px;
-  background-image: url(${props => props.img});
+  background-image: url(${(props) => props.img});
   background-size: cover;
   background-position: center;
   display: flex;
@@ -92,11 +91,11 @@ const PlaceText = styled.div`
     align-items: center;
     margin: 0;
     font-size: 12px;
-    color: #8C8D90;
+    color: #8c8d90;
     gap: 4px;
 
     svg {
-      color: #97DF47;
+      color: #97df47;
     }
   }
 `;

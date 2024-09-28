@@ -1,10 +1,9 @@
-import { useState } from "react";
-import { useLocation } from "react-router-dom";
-// import PropTypes from "prop-types";
-import styled from "styled-components";
-import SortPopup from "../../components/SearchPage/SortPopup";
-import DownArrowIcon from "../../assets/icons/down-arrow.svg?react";
-import SearchHeader from "../../components/SearchPage/SearchHeader";
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import styled from 'styled-components';
+import SortPopup from '../../components/SearchPage/SortPopup';
+import DownArrowIcon from '../../assets/icons/down-arrow.svg?react';
+import SearchHeader from '../../components/SearchPage/SearchHeader';
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -60,7 +59,7 @@ const SearchResultScreen = () => {
   console.log(location);
 
   const [isPopupVisible, setIsPopupVisible] = useState(false);
-  const [sortOption, setSortOption] = useState("latest");
+  const [sortOption, setSortOption] = useState('latest');
 
   const togglePopup = () => {
     setIsPopupVisible(!isPopupVisible);
@@ -79,7 +78,7 @@ const SearchResultScreen = () => {
           <SearchResultCount>
             <span>여행기 검색 결과 건</span>
             <SortButton onClick={togglePopup}>
-              {sortOption === "latest" ? "최신순" : "정확도순"}
+              {sortOption === 'latest' ? '최신순' : '정확도순'}
               <DownArrow />
             </SortButton>
           </SearchResultCount>
@@ -98,14 +97,4 @@ const SearchResultScreen = () => {
   );
 };
 
-/* SearchResultScreen.propTypes = {
-  searchResults: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      link: PropTypes.string.isRequired,
-      snippet: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-};
- */
 export default SearchResultScreen;

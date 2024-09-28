@@ -1,10 +1,9 @@
-import { useState, useRef, useEffect } from "react";
-import styled from "styled-components";
-import Footer from "../components/common/Layout/Footer";
-import { BottomSheet } from "react-spring-bottom-sheet";
-import TravelCard from "../components/MyPage/TravelCard";
-import { getProfile } from "../api/userApi";
-import LocationIconSrc from "@/assets/icons/location.svg";
+import { useState, useRef, useEffect } from 'react';
+import styled from 'styled-components';
+import Footer from '../components/common/Layout/Footer';
+import { BottomSheet } from 'react-spring-bottom-sheet';
+import TravelCard from '../components/MyPage/TravelCard';
+import { getProfile } from '../api/userApi';
 
 const GradientBackground = styled.div`
   height: 100vh;
@@ -141,14 +140,14 @@ const MyPageScreen = () => {
       {/* 프로필 영역 */}
       <ProfileSection>
         <ProfileImage
-          onClick={() => document.getElementById("fileInput").click()}
+          onClick={() => document.getElementById('fileInput').click()}
         >
-          {profileImage ? <img src={profileImage} alt="프로필 이미지" /> : "+"}
+          {profileImage ? <img src={profileImage} alt='프로필 이미지' /> : '+'}
         </ProfileImage>
         <HiddenFileInput
-          id="fileInput"
-          type="file"
-          accept="image/*"
+          id='fileInput'
+          type='file'
+          accept='image/*'
           onChange={handleImageUpload}
         />
         <ProfileName>여행하는 미르미</ProfileName>

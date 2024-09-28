@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -7,13 +6,13 @@ import 'swiper/css/free-mode';
 import { FreeMode } from 'swiper/modules';
 
 const tagData = [
-  { tag: "휴식" },
-  { tag: "식도락" },
-  { tag: "모험적인" },
-  { tag: "가족" },
-  { tag: "동남아" },
-  { tag: "동남아" },
-  { tag: "동남아" },
+  { tag: '휴식' },
+  { tag: '식도락' },
+  { tag: '모험적인' },
+  { tag: '가족' },
+  { tag: '동남아' },
+  { tag: '동남아' },
+  { tag: '동남아' },
 ];
 
 const TagSwiper = ({ selectedTags, setSelectedTags }) => {
@@ -31,9 +30,9 @@ const TagSwiper = ({ selectedTags, setSelectedTags }) => {
   return (
     <SwiperWrapper>
       <Swiper
-        slidesPerView="auto"
+        slidesPerView='auto'
         spaceBetween={8}
-        className="tagSwiper"
+        className='tagSwiper'
         freeMode={true}
         modules={[FreeMode]}
         style={{ width: '390px', height: '34px' }}
@@ -66,7 +65,8 @@ const SwiperWrapper = styled.div`
 
 const Keyword = styled.div`
   padding: 8px 16px;
-  background-color: ${({ active }) => (active ? 'var(--color-main)' : 'transparent')};
+  background-color: ${({ active }) =>
+    active ? 'var(--color-main)' : 'transparent'};
   color: ${({ active }) => (active ? 'white' : 'var(--color-main)')};
   border-radius: 20px;
   border: solid 1px var(--color-main);
