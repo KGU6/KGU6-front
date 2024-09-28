@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import heartIcon from "@/assets/icons/heart-icon.svg?react";
-import { color } from "framer-motion";
 
 export const Title = styled.h2`
   margin: 20px 0;
@@ -45,12 +43,15 @@ export const LikesBox = styled.div`
   gap: 10px;
 `;
 
-export const HeartIcon = styled(heartIcon)`
+export const HeartIconBtn = styled.button`
   width: 15px;
   height: 15px;
   cursor: pointer;
   display: inline-block;
-  color: ${({ liked }) => (liked ? "#FFAEAD" : "#BBBEC2")};
+
+  svg {
+    fill: ${(props) => (props.$liked ? "#FFAEAD" : "#BBBEC2")};
+  }
 `;
 
 export const ArticleWrap = styled.article`

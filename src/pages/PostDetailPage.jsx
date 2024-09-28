@@ -2,8 +2,8 @@ import GoogleMapCP from "@/components/GoogleMap";
 import {
   Title,
   ArticleWrap,
-  HeartIcon,
   LikesBox,
+  HeartIconBtn,
 } from "@/components/postDetail/postDetail.style.js";
 import KeyWord from "../components/common/KeyWord.jsx";
 import { KeywordListBox } from "../components/createPost/KeywordList/KeywordList.style.js";
@@ -13,6 +13,7 @@ import LocationIcon from "@/assets/icons/location-dot-icon.svg?react";
 import { PlaceContainer } from "@/components/createPost/Content/Content.style.js";
 import { Section } from "../components/postDetail/postDetail.style.js";
 import { useState } from "react";
+import HeartIcon from "@/assets/icons/heart-icon.svg?react";
 
 const PostDetailPage = () => {
   const [liked, setLiked] = useState(false);
@@ -51,7 +52,9 @@ const PostDetailPage = () => {
         <KeyWord str={"시드니"} />
       </KeywordListBox>
       <LikesBox>
-        <HeartIcon liked={liked} onClick={handleLikeClick} />
+        <HeartIconBtn $liked={liked} onClick={handleLikeClick}>
+          <HeartIcon />
+        </HeartIconBtn>
         <p>202</p>
       </LikesBox>
 
