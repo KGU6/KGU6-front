@@ -8,9 +8,7 @@ import {
 } from './MainImage.style.js';
 import loginbg from '@/assets/images/loginbg.jpg';
 
-const MainImage = () => {
-  const [viewProfileImg, setViewProfileImg] = useState();
-
+const MainImage = ({ viewProfileImg, setViewProfileImg }) => {
   const fileHandler = (e) => {
     const file = e.target.files?.[0];
 

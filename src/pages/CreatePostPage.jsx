@@ -13,7 +13,11 @@ import AddContent from '../components/createPost/AddContent/index.jsx';
 import MainImage from '../components/createPost/MainImage/index.jsx';
 
 const CreatePostPage = () => {
+  const [title, setTitle] = useState('');
+  const [viewProfileImg, setViewProfileImg] = useState('');
   const [contentList, setContentList] = useState([]);
+  const [keywordList, setKeywordList] = useState([]);
+  const [date, setDate] = useState();
 
   const addContent = (content) => {
     setContentList((prev) => [...prev, content]);
@@ -29,15 +33,22 @@ const CreatePostPage = () => {
 
   return (
     <>
-      <Title placeholder='제목을 입력하세요' />
-      <DatePicker />
+      <Title
+        placeholder='제목을 입력하세요'
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      <DatePicker date={date} setDate={setDate} />
       <GoogleMapCP
         placeList={contentList.map((item) => ({
-          status: item.status,
-          location: { lat: item.place.lat, lng: item.place.lng },
+          status: item.cloud,
+          location: { lat: item.lat, lng: item.lng },
         }))}
       />
-      <MainImage />
+      <MainImage
+        viewProfileImg={viewProfileImg}
+        setViewProfileImg={setViewProfileImg}
+      />
       {contentList.map((item, index) => (
         <Content
           key={index}
@@ -47,10 +58,20 @@ const CreatePostPage = () => {
         />
       ))}
       <AddContent addContent={addContent} />
-      <KeywordList />
+      <KeywordList keywordList={keywordList} setKeywordList={setKeywordList} />
       <ButtonBox>
         <TempSaveButton>임시저장</TempSaveButton>
-        <SaveButton>저장</SaveButton>
+        <SaveButton
+          onClick={() => {
+            console.log(title, viewProfileImg, contentList, keywordList);
+            if (date?.end && date.start) {
+              console.log(date.end.year, date.end.month, date.end.day);
+              console.log(date.start.year, date.start.month, date.start.day);
+            }
+          }}
+        >
+          저장
+        </SaveButton>
       </ButtonBox>
     </>
   );

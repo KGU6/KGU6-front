@@ -43,12 +43,10 @@ export const postData = (() => {
 
   const data = line.map((item, index) => ({
     id: index,
-    place: {
-      name: item.station,
-      lat: item.code[0],
-      lng: item.code[1],
-    },
-    status: 'GOOD',
+    placeName: item.station,
+    lat: item.code[0],
+    lng: item.code[1],
+    cloud: 'RED',
     content: '',
   }));
 

@@ -19,33 +19,33 @@ function Content({ id, content, updateContent }) {
     <>
       <PlaceContainer>
         <LocationIcon />
-        {content.place.name}
+        {content.placeName}
         <IconBox>
           <IconButton
-            $isActive={content.status === 'GOOD'}
+            $isActive={content.cloud === 'RED'}
             onClick={() => {
-              if (content.status !== 'GOOD') {
-                updateContent(id, 'status', 'GOOD');
+              if (content.cloud !== 'RED') {
+                updateContent(id, 'cloud', 'RED');
               }
             }}
           >
             <CloudRedIcon />
           </IconButton>
           <IconButton
-            $isActive={content.status === 'NOT_BAD'}
+            $isActive={content.cloud === 'BLUE'}
             onClick={() => {
-              if (content.status !== 'NOT_BAD') {
-                updateContent(id, 'status', 'NOT_BAD');
+              if (content.cloud !== 'BLUE') {
+                updateContent(id, 'cloud', 'BLUE');
               }
             }}
           >
             <CloudBlueIcon />
           </IconButton>
           <IconButton
-            $isActive={content.status === 'BAD'}
+            $isActive={content.cloud === 'GRAY'}
             onClick={() => {
-              if (content.status !== 'BAD') {
-                updateContent(id, 'status', 'BAD');
+              if (content.cloud !== 'GRAY') {
+                updateContent(id, 'cloud', 'GRAY');
               }
             }}
           >
@@ -55,7 +55,7 @@ function Content({ id, content, updateContent }) {
       </PlaceContainer>
       <QuillEdi
         theme='snow'
-        value={content.value}
+        value={content.content}
         onChange={(content) => {
           updateContent(id, 'content', content);
         }}
