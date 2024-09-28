@@ -1,137 +1,85 @@
-import { useState } from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import SearchHeader from "../../components/SearchPage/SearchHeader.jsx";
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import LeftArrowIcon from '@/assets/icons/left-arrow.svg?react';
+import GlassesIcon from '@/assets/icons/glasses.svg?react';
+import CloseIcon from '@/assets/icons/close.svg?react'; // Make sure to correct CloseIcon spelling here
 
-const SearchContainer = styled.div`
-  padding: 20px;
-  width: 80vw;
-  height: 100vh;
+const SearchBarWrapper = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-`;
-
-const KeywordContainer = styled.div`
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  border-radius: 25px;
+  margin-top: 30px;
   margin-bottom: 20px;
 `;
 
-const KeywordTitle = styled.h3`
-  margin-bottom: 8px;
-  font-size: 18px;
-  font-weight: 800;
-`;
-
-const KeywordList = styled.div`
+const SearchBar = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  background-color: #f2f3f3;
+  border-radius: 25px;
+  padding: 0 10px; /* Adding some padding inside the search bar */
 `;
 
-const Keyword = styled.span`
-  background-color: ${(props) => (props.$recommended ? "#EFFDDE" : "#FFFFFF")};
-  color: ${(props) => (props.$recommended ? "#7BA24F" : "#95989D")};
-  border: 1px solid
-    ${(props) => (props.$recommended ? "transparent" : "#BBBEC2")}; /* 동적 border 설정 */
-  border-radius: 30px;
-  padding: 8px 15px;
-  font-size: 14px;
-  margin: 5px;
+const LeftArrow = styled(LeftArrowIcon)`
+  width: 24px;
+  height: 24px;
+  margin-right: 20px;
   cursor: pointer;
-  display: inline-block;
 `;
 
-const SearchScreen = ({ onSearch, recentKeywords }) => {
-  const [query, setQuery] = useState("");
-  const [recommendedKeywords] = useState([
-    "서울",
-    "오스트리아",
-    "오사카",
-    "나트랑",
-    "가을",
-    "제주도",
-  ]);
+const Glasses = styled(GlassesIcon)`
+  width: 17px;
+  height: 17px;
+  margin-right: 10px;
+`;
 
-  const handleInputChange = (e) => {
-    setQuery(e.target.value);
-  };
+const Close = styled(CloseIcon)`
+  width: 17px;
+  height: 17px;
+  margin-left: 10px; /* Space between the input and close icon */
+  cursor: pointer;
+`;
 
-  const handleClear = () => {
-    setQuery("");
-  };
+const Input = styled.input`
+  border: none;
+  outline: none;
+  flex: 1;
+  padding: 8px;
+  font-size: 13px;
+  background-color: transparent;
+`;
 
-  const performSearch = async (searchQuery) => {
-    const API_KEY = "AIzaSyB1u-E_Afr63fO2N0WMkWizbw33qee2BMQ";
-    const CX = "c38a97b665d464515";
-    const URL = `https://www.googleapis.com/customsearch/v1?key=${API_KEY}&cx=${CX}&q=${searchQuery}`;
-
-    try {
-      const response = await fetch(URL);
-      const data = await response.json();
-      const results = data.items || [];
-
-      onSearch(results, searchQuery);
-    } catch (error) {
-      console.error("Error fetching search results", error);
-    }
-  };
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    performSearch(query);
-  };
-
-  const handleKeywordClick = (keyword) => {
-    setQuery(keyword);
-    performSearch(keyword);
-  };
-
+const SearchHeader = ({ query, onInputChange, onSearch, goBack, onClear }) => {
   return (
-    <SearchContainer>
-      <SearchHeader
-        query={query}
-        onClear={handleClear}
-        onInputChange={handleInputChange}
-        onSearch={handleSearch}
-        goBack={() => window.history.back()}
-      />
-
-      <KeywordContainer>
-        <KeywordTitle>최근 검색어</KeywordTitle>
-        <KeywordList>
-          {recentKeywords.length > 0 ? (
-            recentKeywords.map((keyword, index) => (
-              <Keyword key={index} onClick={() => handleKeywordClick(keyword)}>
-                {keyword}
-              </Keyword>
-            ))
-          ) : (
-            <p>최근 검색어가 없습니다.</p>
-          )}
-        </KeywordList>
-      </KeywordContainer>
-
-      <KeywordContainer>
-        <KeywordTitle>추천 검색어</KeywordTitle>
-        <KeywordList>
-          {recommendedKeywords.map((keyword, index) => (
-            <Keyword
-              key={index}
-              $recommended={true}
-              onClick={() => handleKeywordClick(keyword)}
-            >
-              {keyword}
-            </Keyword>
-          ))}
-        </KeywordList>
-      </KeywordContainer>
-    </SearchContainer>
+    <SearchBarWrapper>
+      <LeftArrow onClick={goBack} />
+      <form onSubmit={onSearch} style={{ width: '100%' }}>
+        <SearchBar>
+          <Glasses onClick={onSearch} />
+          <Input
+            type='text'
+            value={query}
+            onChange={onInputChange}
+            placeholder='여행지, 키워드를 검색해 보세요'
+          />
+          <Close onClick={onClear} />
+          {/* Show the close icon only if query exists */}
+        </SearchBar>
+      </form>
+    </SearchBarWrapper>
   );
 };
 
-SearchScreen.propTypes = {
+SearchHeader.propTypes = {
+  query: PropTypes.string.isRequired,
+  onInputChange: PropTypes.func.isRequired,
   onSearch: PropTypes.func.isRequired,
-  recentKeywords: PropTypes.array.isRequired,
+  goBack: PropTypes.func.isRequired,
+  onClear: PropTypes.func.isRequired, // Added prop type for the onClear function
 };
 
-export default SearchScreen;
+export default SearchHeader;
