@@ -20,11 +20,11 @@ const TagSwiper = ({ selectedTags, setSelectedTags }) => {
   // 태그 클릭 시 상태 변경
   const handleTagClick = (tag) => {
     if (selectedTags.includes(tag)) {
-      // 이미 활성화된 태그라면 배열에서 제거
-      setSelectedTags(selectedTags.filter((activeTag) => activeTag !== tag));
+      // 이미 활성화된 태그를 클릭한 경우 비활성화 (배열을 빈 값으로 만듦)
+      setSelectedTags([]);
     } else {
-      // 활성화되지 않은 태그라면 배열에 추가
-      setSelectedTags([...selectedTags, tag]);
+      // 선택한 태그만 활성화
+      setSelectedTags([tag]);
     }
   };
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import LocationIconSrc from "../assets/location.svg";
+import LocationIconSrc from "../assets/icons/loaction.svg";
 
 const GradientBackground = styled.div`
   background: radial-gradient(circle, #a7e661, #dff6c5);

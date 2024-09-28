@@ -6,7 +6,6 @@ import { RiKakaoTalkFill } from "react-icons/ri";
 import { SiNaver } from "react-icons/si";
 import { FaApple } from "react-icons/fa";
 import { IoMdArrowBack } from "react-icons/io";
-import { login } from "../api/login";
 
 function LoginPage() {
   const [clicked, setIsClicked] = useState(false);
@@ -15,18 +14,46 @@ function LoginPage() {
   const [isAnimating, setIsAnimating] = useState(true); // 애니메이션 완료 여부 관리
   const [username, setUsername] = useState("");  // 아이디 입력값 관리
   const [password, setPassword] = useState("");  // 비밀번호 입력값 관리
-  const [loginOk,setLoginOk]=useState(null);
+  const [loginOk, setLoginOk] = useState(null);
+  const [emailWarning, setEmailWarning] = useState(""); // 이메일 경고 메시지
 
-  const isButtonActive = username.trim() !== "" && password.trim() !== "";
   const navigate = useNavigate();
+
+  // 이메일 형식 검증 함수
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 이메일 형식의 정규식
+    return emailRegex.test(email); // 이메일 형식이 맞으면 true 반환
+  };
+
+  const isButtonActive = username.trim() !== "" && password.trim() !== "" && validateEmail(username); // 이메일 형식과 공백이 아닌 값 체크
 
   const handleLoginClick = () => {
     setIsClicked(!clicked);
   };
 
+  const setCookie = (name, value, days) => {
+    const expires = new Date();
+    expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000); // days 이후 만료
+    document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/;`;
+  };
+
   const goToHome = () => {
-    setLoginOk(login(username));
-    navigate('/h');
+    if (validateEmail(username)) {
+      setCookie('username', username, 7);
+      navigate('/h');
+    }
+  };
+
+  const handleMouseEnter = () => {
+    if (!validateEmail(username)) {
+      setEmailWarning("올바른 이메일 형식이 필요합니다."); // 이메일 경고 메시지 설정
+    } else {
+      setEmailWarning(""); // 이메일 형식이 맞을 경우 경고 메시지 초기화
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setEmailWarning(""); // 마우스를 떼면 경고 메시지를 없앰
   };
 
   // 3초 후 logoing을 false로 설정하며, 그 전에 fade-out 상태로 전환
@@ -44,11 +71,13 @@ function LoginPage() {
 
   // 초기 로딩 화면에서 fade-out 및 z-index 조정
   return (
-    <>{logoing&&
+    <>
+      {logoing && 
       <Container className={`second ${fadeOut ? 'fade-out' : ''}`} style={{ zIndex: 999 }}>
         <img src="../src/assets/login/mainLogo.png" alt="Main Logo" />
       </Container>}
-      {clicked&&
+      
+      {clicked && 
       <Container className="second">
       <button className="arrow" onClick={handleLoginClick}><IoMdArrowBack /></button>
       <span className="title">로그인</span>
@@ -58,7 +87,7 @@ function LoginPage() {
             <input
               className="idpw"
               type="text"
-              placeholder="아이디를 입력해주세요"
+              placeholder="이메일을 입력해주세요"
               value={username}
               onChange={(e) => setUsername(e.target.value)}  // 아이디 입력값 업데이트
             />
@@ -70,7 +99,15 @@ function LoginPage() {
               onChange={(e) => setPassword(e.target.value)}  // 비밀번호 입력값 업데이트
             />
           </InputWrapper>
-          <SubmitButton active={isButtonActive} onClick={goToHome}>로그인</SubmitButton>
+          <SubmitButton 
+            active={isButtonActive} 
+            onClick={goToHome}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            로그인
+          </SubmitButton>
+          {emailWarning && <WarningMessage>{emailWarning}</WarningMessage>} {/* 경고 메시지 출력 */}
         </LoginForm>
         <LinksContainer>
           <Link href="#">아이디 찾기</Link>
@@ -89,6 +126,7 @@ function LoginPage() {
       </SocialLogin>
     </Container>
       }
+
       <Container style={{ zIndex: 1 }}>
         <div className="logoWrapper">
           <div className="logo">구름으로</div>
@@ -275,6 +313,12 @@ const SubmitButton = styled.button`
   &:hover {
     background-color: ${({ active }) => (active ? '#87ceeb' : '#dcedc8')};
   }
+`;
+
+const WarningMessage = styled.p`
+  color: red;
+  font-size: 14px;
+  margin-top: -10px;
 `;
 
 const LinksContainer = styled.div`

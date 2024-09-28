@@ -14,9 +14,15 @@ import { FreeMode } from 'swiper/modules';
 import OdaibaImage from '../../assets/placeImg/odaiba.jpg';
 import RecommendPlace from '../../components/homepage/RecommendPlace';
 import HotPlaceGrid from '../../components/homepage/HotPlaceGrid';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
   const [selectedTags, setSelectedTags] = useState([]);
+  const navigate = useNavigate();
+
+  const goToSearch = () => {
+    navigate('/search');
+  };
 
   const placeData = [
     { Title: "Title1", sub: "Subtitle1", img: OdaibaImage },
@@ -29,7 +35,7 @@ const HomePage = () => {
     <Container>
       <SearchBarWrapper>
         <IoSearchOutline className="search-icon" />
-        <SearchBar placeholder="여행지, 키워드를 입력해 보세요" />
+        <SearchBar onClick={goToSearch} placeholder="여행지, 키워드를 입력해 보세요" />
         <FaRegBell className='bell-icon' />
       </SearchBarWrapper>
 
@@ -100,7 +106,7 @@ const SearchBarWrapper = styled.div`
   align-items: center;
   position: relative;
   width: 100%;
-  margin-top: 10px;
+  margin-top: 64px;
 
   .search-icon {
     font-size: 17px;

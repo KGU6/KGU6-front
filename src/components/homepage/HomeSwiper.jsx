@@ -10,26 +10,30 @@ import { HSwiper } from "../../api/Homepage/HSwiper";
 const HomeSwiper = () => {
   const [activeIndex, setActiveIndex] = useState(0); // 현재 선택된 슬라이드 인덱스
   const swiperRef = useRef(null); // Swiper에 대한 참조
-  const [apiData, setApiData] = useState([]);
   const [placeData, setPlaceData] = useState([]);
 
   useEffect(() => {
     // API로부터 데이터를 받아와 `placeData`를 업데이트합니다.
     const fetchData = async () => {
       const data = await HSwiper();
-      setApiData(data.travelogs);  // API 데이터를 상태에 저장
-
       const updatedPlaceData = data.travelogs.map((item, index) => ({
         Title: item.title || `Title${index + 1}`,
         userName: item.userName || `Subtitle${index + 1}`,
         img: item.imageUrl || '', // imageUrl을 img로 설정
       }));
 
-      setPlaceData(updatedPlaceData); // 업데이트된 데이터를 `placeData`로 설정
+      setPlaceData(updatedPlaceData.slice(0, 5)); // 최대 5개로 제한
     };
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    // placeData가 로드되면 중앙 슬라이드가 선택되도록 설정
+    if (placeData.length > 0 && swiperRef.current) {
+      swiperRef.current.swiper.slideTo(1); // 중앙 슬라이드를 2번째로 설정
+    }
+  }, [placeData]);
 
   // 슬라이드 변경 시 현재 활성화된 슬라이드 인덱스를 업데이트
   const handleSlideChange = () => {
@@ -66,7 +70,7 @@ const HomeSwiper = () => {
 export default HomeSwiper;
 
 const SwiperContainer = styled.div`
-  width: 100%; /* 부모 컨테이너의 전체 너비 */
+  width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -75,16 +79,16 @@ const SwiperContainer = styled.div`
 `;
 
 const StyledSwiper = styled(Swiper)`
-  width: calc(100% + 20px); /* 10px 왼쪽, 10px 오른쪽 여백 포함 */
+  width: calc(100% + 20px);
   height: 373px;
-  margin-left: -16px; /* Swiper를 왼쪽으로 10px 이동 */
+  margin-left: -16px;
 
   .swiper-pagination {
     position: absolute;
     left: 52%;
-    bottom: 0px; /* Swiper 하단에서 약간 떨어뜨림 */
-    transform: translateX(-50%); /* 중앙 정렬을 위한 transform */
-    z-index: 10; /* 필요시 z-index를 설정하여 다른 요소 위에 표시되도록 함 */
+    bottom: 0px;
+    transform: translateX(-50%);
+    z-index: 10;
   }
 `;
 
@@ -115,6 +119,8 @@ const CardTitle = styled.span`
   color: #ffffff;
   font-weight: var(--weight-bold);
   margin-bottom: 0;
+  //임시
+  -webkit-text-stroke: 2px black;
 `;
 
 const CardDescription = styled.p`
@@ -125,4 +131,3 @@ const CardDescription = styled.p`
   word-break: keep-all;
   text-align: left;
 `;
-

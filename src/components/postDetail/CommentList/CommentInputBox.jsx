@@ -5,9 +5,14 @@ import {
 import { useState } from 'react';
 import UpArrowIcon from '@/assets/icons/up-arrow-icon.svg?react';
 import BasicUserIcon from '@/assets/icons/basic-user-icon.svg?react';
+import { uploadComment } from '../../../api/uploadComment.jsx';
 
 const CommentInputBox = () => {
   const [input, setInput] = useState('');
+
+  const uploadInput=(input)=>{
+    uploadComment(input);
+  }
 
   return (
     <CommentInputBoxContainer>
