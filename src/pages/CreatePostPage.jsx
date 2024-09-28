@@ -10,6 +10,7 @@ import {
 import Content from '../components/createPost/Content/index.jsx';
 import { useState } from 'react';
 import AddContent from '../components/createPost/AddContent/index.jsx';
+import SearchInput from '../components/GoogleMap/SearchInput.jsx';
 
 const CreatePostPage = () => {
   const [contentList, setContentList] = useState([]);
@@ -25,11 +26,15 @@ const CreatePostPage = () => {
       )
     );
   };
+  const a = (latitude, longitude, placeName, placeAddress) => {
+    console.log(latitude, longitude, placeName, placeAddress);
+  };
 
   return (
     <>
       <Title placeholder='제목을 입력하세요' />
       <DatePicker />
+      <SearchInput handleSearch={a} />
       <GoogleMapCP
         placeList={contentList.map((item) => ({
           status: item.status,

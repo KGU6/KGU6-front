@@ -2,7 +2,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import LeftArrowIcon from '@/assets/icons/left-arrow.svg?react';
 import GlassesIcon from '@/assets/icons/glasses.svg?react';
-import CloseIcon from '@/assets/icons/close.svg?react'; // Make sure to correct CloseIcon spelling here
+import CloseIcon from '@/assets/icons/close.svg?react';
+import SearchInput from '../GoogleMap/SearchInput.jsx'; // Make sure to correct CloseIcon spelling here
 
 const SearchBarWrapper = styled.div`
   display: flex;
@@ -44,7 +45,7 @@ const Close = styled(CloseIcon)`
   cursor: pointer;
 `;
 
-const Input = styled.input`
+export const Input = styled.input`
   border: none;
   outline: none;
   flex: 1;
@@ -60,12 +61,7 @@ const SearchHeader = ({ query, onInputChange, onSearch, goBack, onClear }) => {
       <form onSubmit={onSearch} style={{ width: '100%' }}>
         <SearchBar>
           <Glasses onClick={onSearch} />
-          <Input
-            type='text'
-            value={query}
-            onChange={onInputChange}
-            placeholder='여행지, 키워드를 검색해 보세요'
-          />
+          <SearchInput />
           <Close onClick={onClear} />
           {/* Show the close icon only if query exists */}
         </SearchBar>
