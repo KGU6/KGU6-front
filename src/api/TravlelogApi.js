@@ -22,3 +22,23 @@ export const PostTravlelog = async (data, imgFile) => {
     console.log(error);
   }
 };
+
+export const getTravlelog = async (id) => {
+  try {
+    const response = await fetch(
+      API_PATH.TRAVERLOG.GET.replace(':travelogId', id),
+      {
+        method: 'GET',
+      }
+    );
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.error);
+    }
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
