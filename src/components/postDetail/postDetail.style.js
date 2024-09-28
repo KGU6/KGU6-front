@@ -1,13 +1,32 @@
 import styled from 'styled-components';
 
-export const Title = styled.h2``;
+export const Title = styled.h2`
+  margin: 20px 0;
+  font-size: var(--font-medium);
+  font-weight: var(--weight-semi-bold);
+`;
 
 export const InfoBox = styled.div`
   display: flex;
   justify-content: space-between;
+  color: #5c5e61;
+
+  & > div {
+    display: flex;
+    align-items: center;
+
+    & > svg {
+      margin-right: 5px;
+    }
+  }
 
   img {
   }
+`;
+
+export const Date = styled.div`
+  font-weight: var(--weight-light);
+  color: var(--color-gray-800);
 `;
 
 export const Section = styled.section`
@@ -20,6 +39,8 @@ export const Section = styled.section`
 
 export const ArticleWrap = styled.article`
   line-height: initial;
+  color: var(--color-gray-700);
+
   h1 {
     display: block;
     font-size: 2em;
