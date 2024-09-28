@@ -4,27 +4,46 @@ import styled from "styled-components";
 import { RiKakaoTalkFill } from "react-icons/ri";
 import { SiNaver } from "react-icons/si";
 import { FaApple } from "react-icons/fa";
+import { IoMdArrowBack } from "react-icons/io";
 
 function LoginPage() {
   const [clicked, setIsClicked] = useState(false);
+  const [username, setUsername] = useState("");  // 아이디 입력값 관리
+  const [password, setPassword] = useState("");  // 비밀번호 입력값 관리
 
-  // LoginButton을 눌렀을 때 상태 변경
+  // 로그인 버튼 활성화 상태를 관리
+  const isButtonActive = username.trim() !== "" && password.trim() !== "";
+
   const handleLoginClick = () => {
-    setIsClicked(true);
+    setIsClicked(!clicked);
   };
 
-  // clicked가 true이면 새로운 화면을 렌더링
+  // clicked가 true일 때 로그인 폼 렌더링
   if (clicked) {
     return (
-      <Container>
+      <Container className="second">
+        <button className="arrow" onClick={handleLoginClick}><IoMdArrowBack/></button>
         <span className="title">로그인</span>
         <MainWrapper>
           <LoginForm>
             <InputWrapper>
-              <input className="idpw" type="text" placeholder="아이디를 입력해주세요" />
-              <input className="idpw" type="password" placeholder="비밀번호를 입력해주세요" />
+              <input
+                className="idpw"
+                type="text"
+                placeholder="아이디를 입력해주세요"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}  // 아이디 입력값 업데이트
+              />
+              <input
+                className="idpw"
+                type="password"
+                placeholder="비밀번호를 입력해주세요"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}  // 비밀번호 입력값 업데이트
+              />
             </InputWrapper>
-            <SubmitButton>로그인</SubmitButton>
+            {/* 버튼 활성화 상태에 따라 색상 변경 */}
+            <SubmitButton active={isButtonActive}>로그인</SubmitButton>
           </LoginForm>
           <LinksContainer>
             <Link href="#">아이디 찾기</Link>
@@ -39,7 +58,7 @@ function LoginPage() {
             <SocialButton color="#03c75a"><SiNaver/></SocialButton>
             <SocialButton color="#fddc3f"><RiKakaoTalkFill/></SocialButton>
             <SocialButton color="#000000"><FaApple/></SocialButton>
-            </div>
+          </div>
         </SocialLogin>
       </Container>
     );
@@ -48,7 +67,11 @@ function LoginPage() {
   // clicked가 false일 때 기존 로그인 화면 렌더링
   return (
     <Container>
-      <div className="logo">LOGO</div>
+      <div className="logoWrapper">
+        <div className="logo">구름으로</div>
+        <div className="logo">기록하는</div>
+        <div className="logo">당신만의 여행기</div>
+      </div>
       <FirstButtonContainer>
         <SignupButton>회원가입</SignupButton>
         <LoginButton onClick={handleLoginClick}>로그인</LoginButton>
@@ -58,43 +81,72 @@ function LoginPage() {
 }
 
 export default LoginPage;
-//제일 초기 화면
+
+// 스타일 컴포넌트 설정 - 백틱 추가
 const Container = styled.div`
   display: flex;
-  position:relative;
+  position: relative;
   flex-direction: column;
   align-items: center;
   width: 390px;
   height: 844px;
-  background-color: #9fdd59;
   color: white;
   text-align: center;
-  .title{
+  background-image: linear-gradient(
+    to bottom, 
+    rgba(0, 0, 0, 0.38) 38%, 
+    rgba(0, 0, 0, 0.475) 47.5%, 
+    rgba(0, 0, 0, 0.76) 76%, 
+    rgba(0, 0, 0, 0.95) 95%
+  ), url("../src/assets/loginbg.jpg");
+  background-size: cover;
+  background-position: center;
+  .title {
     position: absolute;
     font-size: 18px;
-    line-height:22px;
-    top:75px;
-    height:20px;
-    width:60px;
+    line-height: 22px;
+    top: 75px;
+    height: 20px;
+    width: 60px;
+    color: #18191A;
+    font-weight: var(--weight-semi-bold);
   }
-  .logo{
-    font-size: 48px;
-    margin-top: 100px;
-    font-weight: bold;
-    position:absolute;
-    top:305px;
-    @media (max-width: 768px) {
-      font-size: 36px;
+  .logoWrapper {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    width: 300px;
+    height: 147px;
+    position: absolute;
+    top: 386px;
+    text-align: left;
+    .logo {
+      font-size: 30px;
+      font-weight: var(--weight-light);
+      &:last-of-type {
+        font-weight: var(--weight-semi-bold)!important;
+      }
     }
-
+  }
+  .arrow {
+    font-size: 25px;
+    color: #8c8d90;
+    background-color:transparent;
+    position: absolute;
+    left: 19px;
+    top: 71px;
+    padding:0;
+  }
+  &.second {
+    background-image: none;
   }
 `;
 
 const FirstButtonContainer = styled.div`
   width: 314px;
   height: 120px;
-  position:absolute;
-  top:605px;
+  position: absolute;
+  top: 605px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -108,25 +160,24 @@ const Button = styled.button`
   color: black;
   border-radius: 44px;
   cursor: pointer;
-  @media (max-width: 768px) {
-    font-size: 16px;
-    padding: 12px;
-  }
 `;
 
 const SignupButton = styled(Button)`
-  background-color: #6eeb83;
+  background-color: #97DF47;
+  color: #18191A;
   border: none;
+  font-weight: var(--weight-bold);
 `;
 
 const LoginButton = styled(Button)`
   background-color: transparent;
-  color: black;
-  border: 0.6px solid #6eeb83;
+  color: #9FDD59;
+  border: 0.6px solid #9FDD59;
+  &:hover {
+    background-color: #97DF47;
+    color: #ffffff;
+  }
 `;
-
-
-//여기부터 로그인 세부
 
 const MainWrapper = styled.div`
   width: 100%;
@@ -147,44 +198,44 @@ const LoginForm = styled.div`
 
 const InputWrapper = styled.div`
   width: 100%;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-  margin-bottom:54px;
-  .idpw{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 54px;
+  color: black;
+  .idpw {
     width: 100%;
     padding: 15px;
     font-size: 16px;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-sizing: border-box;
-
     &::placeholder {
       color: #ccc;
     }
   }
-`
+`;
 
 const SubmitButton = styled.button`
-  width: 100%;
-  padding: 15px;
-  background-color: #e8f5e9;
-  color: #333;
-  font-size: 18px;
-  border: none;
+  width: 323px;
+  height: 55px;
+  padding: 10px 12px;
+  background: ${({ active }) => (active ? '#97DF47' : '#DFF6C5')};
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: var(--weight-bold);
   border-radius: 8px;
-  margin-bottom:14px;
-  cursor: pointer;
-
+  margin-bottom: 14px;
+  cursor: ${({ active }) => (active ? 'pointer' : 'default')};
   &:hover {
-    background-color: #dcedc8;
+    background-color: ${({ active }) => (active ? '#87ceeb' : '#dcedc8')};
   }
 `;
 
 const LinksContainer = styled.div`
   display: flex;
   position: relative;
-  gap:10px;
+  gap: 10px;
   width: 100%;
   max-width: 321px;
   margin: 10px 0;
@@ -195,10 +246,13 @@ const LinksContainer = styled.div`
 const Link = styled.a`
   color: #666;
   text-decoration: none;
+  &:hover {
+    color: #97DF47;
+  }
   &:last-of-type {
     text-decoration: underline;
     position: absolute;
-    right:0;
+    right: 0;
   }
 `;
 
@@ -208,8 +262,8 @@ const SocialLogin = styled.div`
   justify-content: center;
   align-items: center;
   gap: 20px;
-  position:absolute;
-  top:522px;
+  position: absolute;
+  top: 522px;
   .menuText {
     font-size: 16px;
     color: #4d4d4d;
@@ -217,7 +271,7 @@ const SocialLogin = styled.div`
   .SBtnWrapper {
     display: flex;
     gap: 13px;
-    width:100%;
+    width: 100%;
   }
 `;
 
@@ -231,10 +285,12 @@ const SocialButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 24px;
+  font-size: 26px;
+  line-height: 26px;
   color: white;
   box-sizing: border-box;
-  padding:0;
+  padding: 0;
+  &:first-of-type {
+    font-size: 24px;
+  }
 `;
-
-

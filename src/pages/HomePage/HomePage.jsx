@@ -1,43 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
 import 'swiper/css';
-import 'swiper/css/pagination';
 import { IoSearchOutline } from "react-icons/io5";
+import HomeSwiper from '../../components/homepageSwiper/HomeSwiper';
 
 const HomePage = () => {
   return (
     <Container>
-      <div className="search-bar-wrapper">
-        <SearchBarWrapper>
-          <IoSearchOutline className="search-icon" />
-          <SearchBar placeholder="여행지, 키워드를 입력해 보세요" />
-        </SearchBarWrapper>
-      </div>
+      <SearchBarWrapper>
+        <IoSearchOutline className="search-icon" />
+        <SearchBar placeholder="여행지, 키워드를 입력해 보세요" />
+      </SearchBarWrapper>
 
-      <SectionTitle>여행의 순간을 함께 느껴보세요</SectionTitle>
-
-      <StyledSwiper
-        spaceBetween={15}
-        slidesPerView={1}  // 한 번에 1개의 슬라이드만 보이도록 설정
-        centeredSlides={true}  // 활성 슬라이드를 가운데로 배치
-        initialSlide={0}  // 첫 번째 슬라이드를 기본으로 선택
-        pagination={{ clickable: true }}
-        modules={[Pagination]}
-        >
-        <SwiperSlide>
-            slide1
-        </SwiperSlide>
-        <SwiperSlide>
-            slide2
-        </SwiperSlide>
-        <SwiperSlide>
-            slide3
-        </SwiperSlide>
-        </StyledSwiper>
-
-
+      <SectionTitle><span className='greenText'>여행의 순간</span>을 함께 느껴보세요</SectionTitle>
+      <div className='SwiperWrapper'><HomeSwiper/></div>
 
       {/* SubTitle 이후 부분 수정 */}
       <SubTitle>추천 여행지</SubTitle>
@@ -102,15 +78,25 @@ export default HomePage;
 
 // styled-components
 const Container = styled.div`
+  width: 100%;
   display: flex;
   position: relative;
   flex-direction: column;
   align-items: center;
-  width: 390px;
   min-height: 100vh;
-  background-color: #f5f5f5;
   color: black;
   text-align: center;
+
+  .SwiperWrapper{
+    width: 100%;
+    height: 400px;
+  }
+
+  .sectionLine{
+    width: 100%;
+    height: 5px;
+    color: #EFF1F4;
+  }
 `;
 
 const SearchBarWrapper = styled.div`
@@ -118,6 +104,7 @@ const SearchBarWrapper = styled.div`
   align-items: center;
   position: relative;
   width: 100%;
+  margin-top: 10px;
 `;
 
 const SearchBar = styled.input`
@@ -130,63 +117,17 @@ const SearchBar = styled.input`
 const SectionTitle = styled.h2`
   font-size: 22px;
   line-height: 26.25px;
+  font-weight: var(--weight-bold);
   color: black;
-  margin: 24px 0 16px 0;
-  width: 263px;
-  height: 27px;
-`;
-
-const StyledSwiper = styled(Swiper)`
-  margin-bottom: 60px;
   width: 100%;
-  height:343px;
+  height: 27px;
+  margin-top: 30px;
+  margin-bottom: 24px;
 
-  .swiper-wrapper {
-    display: flex;
-  // 슬라이드들을 중앙에 배치
-    align-items: center;
-  }
-
-  .swiper-slide {
-    width: 209px;
-    height: 263px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #e0e0e0;
-    border-radius: 26px;
-    transition: all 0.3s ease-in-out;
-  }
-
-  .swiper-slide-active {
-    width: 273px!important;
-    height: 343px;
-    align-items: center;
-  }
-
-  .swiper-slide-prev,
-  .swiper-slide-next {
-    width: calc(273px * 0.75);
-    height: calc(343px * 0.75);
-    opacity: 0.6;
-  }
-  
-  .swiper-pagination-bullets {
-    position: absolute;
-    bottom: 10px;
-  }
-
-  .swiper-pagination-bullet {
-    background: #000;
-    opacity: 0.5;
-  }
-
-  .swiper-pagination-bullet-active {
-    background: #fff;
-    opacity: 1;
+  .greenText{
+    color: #97DF47;
   }
 `;
-
 
 const PlaceholderBox = styled.div`
   width: 168px;
@@ -270,6 +211,7 @@ const KeywordSection = styled.div`
 const KeywordContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  gap: 10px;
   margin-bottom: 16px;
 `;
 
