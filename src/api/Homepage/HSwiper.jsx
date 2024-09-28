@@ -12,8 +12,6 @@ export const HSwiper = async () => {
       if (!response.ok) {
         throw new Error(result.error);
       }
-  
-      console.log(result);
       return result;
     } catch (error) {
       console.log(error);

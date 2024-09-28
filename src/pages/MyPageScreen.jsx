@@ -6,7 +6,6 @@ import TravelCard from "../components/MyPage/TravelCard";
 import { getProfile } from "../api/userApi";
 import LocationIconSrc from "@/assets/icons/location.svg";
 
-
 const GradientBackground = styled.div`
   height: 100vh;
   background: radial-gradient(circle, #a7e661, #dff6c5);

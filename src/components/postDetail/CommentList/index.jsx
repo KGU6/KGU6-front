@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import 'react-spring-bottom-sheet/dist/style.css';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 import {
@@ -13,6 +13,9 @@ const CommentList = ({ comments }) => {
   const [commentList, setCommentList] = useState(comments);
   const sheetRef = useRef(null);
 
+  useEffect(()=>{
+    setCommentList(getComment());
+  },[])
   return (
     <BottomSheet
       open
@@ -31,6 +34,9 @@ const CommentList = ({ comments }) => {
       <Container>
         <CommentListContainer>
           <CommentListItemContainer>
+            {/* {commentList.map((data,index)=>(
+              
+            ))} */}
             <PostHeaderInfo
               profileImg={''}
               name={'이준석'}

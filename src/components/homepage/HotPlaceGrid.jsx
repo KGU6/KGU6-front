@@ -22,7 +22,7 @@ const HotPlaceGrid = () => {
         img: item.imageUrl || '', // imageUrl을 img로 설정
       }));
 
-      setPlaceData(updatedPlaceData); // 업데이트된 데이터를 `placeData`로 설정
+      setPlaceData(updatedPlaceData.slice(0, 4)); // 최대 4개로 제한
     };
 
     fetchData();
