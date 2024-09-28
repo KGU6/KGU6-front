@@ -46,11 +46,13 @@ const HomeSwiper = () => {
 export default HomeSwiper;
 
 const SwiperContainer = styled.div`
+  width:100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-right:10px;
+  z-index:10;
 `;
 
 const Card = styled.div`
