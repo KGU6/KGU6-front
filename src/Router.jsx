@@ -1,6 +1,7 @@
 //import { lazy, Suspense } from 'react';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import MyPageScreen from "./pages/MyPageScreen";
 import Layout from "./components/common/Layout/index.jsx";
 import CreatePostPage from "./pages/CreatePostPage.jsx";
 import PostDetailPage from "./pages/PostDetailPage.jsx";
@@ -23,6 +24,7 @@ const Router = () => {
           <Route path="/search-results" element={<SearchResultScreen />} />
           <Route path='/h' element={<HomePage/>}/>
           <Route path='/l' element={<LoginPage/>}/>
+          <Route path="/mypage" element={<MyPageScreen />} />
         </Route>
       </Routes>
     </BrowserRouter>
