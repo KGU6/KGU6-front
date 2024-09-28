@@ -6,20 +6,23 @@ import {
   ButtonBox,
   SaveButton,
   TempSaveButton,
+  MainPlaceInput,
 } from '../components/createPost/createPost.style.js';
 import Content from '../components/createPost/Content/index.jsx';
 import { useState } from 'react';
 import AddContent from '../components/createPost/AddContent/index.jsx';
 import MainImage from '../components/createPost/MainImage/index.jsx';
 import SearchScreen from './search-screen/SearchScreen.jsx';
+import { PostTravlelog } from '../api/TravlelogApi.js';
 
 const CreatePostPage = () => {
   const [title, setTitle] = useState('');
+  const [mainPlace, setMainPlace] = useState('');
   const [viewProfileImg, setViewProfileImg] = useState('');
+  const [imgFile, setImgFile] = useState(null);
   const [contentList, setContentList] = useState([]);
   const [keywordList, setKeywordList] = useState([]);
   const [date, setDate] = useState();
-
   const [showSearchPage, setShowSearchPage] = useState(false);
 
   const addContent = (content) => {
@@ -36,6 +39,28 @@ const CreatePostPage = () => {
         index === id ? { ...content, [key]: data } : content
       )
     );
+  };
+
+  const registerHandel = async () => {
+    const startDate = formatDate(
+      date?.start.year,
+      date?.start.month,
+      date?.start.day
+    );
+    const endDate = formatDate(date?.end.year, date?.end.month, date?.end.day);
+
+    const data = {
+      title,
+      startDate,
+      endDate,
+      placeContent: contentList,
+      keywords: keywordList,
+      mainPlace,
+    };
+
+    const response = await PostTravlelog(data, imgFile);
+
+    console.log(response);
   };
 
   if (showSearchPage) {
@@ -62,9 +87,17 @@ const CreatePostPage = () => {
           location: { lat: item.lat, lng: item.lng },
         }))}
       />
+      <MainPlaceInput
+        value={mainPlace}
+        onChange={(e) => {
+          setMainPlace(e.target.value);
+        }}
+        placeholder={'여행하신 장소를 입력해주세요!  ex) 대한민국 서울특별시'}
+      />
       <MainImage
         viewProfileImg={viewProfileImg}
         setViewProfileImg={setViewProfileImg}
+        setImgFile={setImgFile}
       />
       {contentList.map((item, index) => (
         <Content
@@ -78,20 +111,19 @@ const CreatePostPage = () => {
       <KeywordList keywordList={keywordList} setKeywordList={setKeywordList} />
       <ButtonBox>
         <TempSaveButton>임시저장</TempSaveButton>
-        <SaveButton
-          onClick={() => {
-            console.log(title, viewProfileImg, contentList, keywordList);
-            if (date?.end && date.start) {
-              console.log(date.end.year, date.end.month, date.end.day);
-              console.log(date.start.year, date.start.month, date.start.day);
-            }
-          }}
-        >
-          저장
-        </SaveButton>
+        <SaveButton onClick={registerHandel}>저장</SaveButton>
       </ButtonBox>
     </>
   );
 };
 
 export default CreatePostPage;
+
+function formatDate(year, month, day) {
+  // 두 자릿수가 되도록 padStart를 사용하여 앞에 0을 추가
+  const formattedMonth = String(month).padStart(2, '0');
+  const formattedDay = String(day).padStart(2, '0');
+
+  // 새로운 형식으로 반환
+  return `${year}-${formattedMonth}-${formattedDay}`;
+}

@@ -8,24 +8,18 @@ import {
 } from './MainImage.style.js';
 import loginbg from '@/assets/images/loginbg.jpg';
 
-const MainImage = ({ viewProfileImg, setViewProfileImg }) => {
+const MainImage = ({ viewProfileImg, setViewProfileImg, setImgFile }) => {
   const fileHandler = (e) => {
-    const file = e.target.files?.[0];
-
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setViewProfileImg(reader.result);
-      };
-      reader.onerror = () => {
-        throw new Error('file reading error');
-      };
-      reader.readAsDataURL(file);
+    const selectedFile = e.target.files?.[0];
+    setImgFile(selectedFile);
+    if (selectedFile) {
+      setViewProfileImg(URL.createObjectURL(selectedFile));
     }
   };
 
   const deleteImage = () => {
     setViewProfileImg(null);
+    setImgFile(null);
   };
 
   return (
