@@ -7,8 +7,6 @@ import SearchScreen from "./pages/search-screen/SearchScreen.jsx";
 import SearchResultScreen from "./pages/search-screen/SearchResultScreen.jsx";
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage";
-import HomePage from './pages/HomePage/HomePage';
-import LoginPage from './pages/LoginPage';
 
 const Router = () => {
   return (
@@ -20,7 +18,7 @@ const Router = () => {
           <Route path='/' element={<HomePage />} />
           <Route path='/l' element={<LoginPage />} />
           <Route path='/create-post' element={<CreatePostPage />} />
-          <Route path='/' element={<PostDetailPage />} />
+          <Route path='/pd' element={<PostDetailPage />} />
           <Route
             path='/search'
             element={

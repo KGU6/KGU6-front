@@ -5,26 +5,28 @@ import {
 import { useState } from 'react';
 import UpArrowIcon from '@/assets/icons/up-arrow-icon.svg?react';
 import BasicUserIcon from '@/assets/icons/basic-user-icon.svg?react';
-import { uploadComment } from '../../../api/uploadComment.jsx';
 
-const CommentInputBox = () => {
+const CommentInputBox = ({ onSubmit }) => {
   const [input, setInput] = useState('');
 
-  const uploadInput=(input)=>{
-    uploadComment(input);
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (input.trim()) {
+      onSubmit(input); // 상위 컴포넌트로 input 값을 전달
+      setInput(''); // 입력란 초기화
+    }
+  };
 
   return (
     <CommentInputBoxContainer>
-      {/*profileImg 없을 경우 조건문 추가하기*/}
       <BasicUserIcon />
-      <CommentInputWrap>
+      <CommentInputWrap onSubmit={handleSubmit}>
         <input
-          placeholder={'댓글을를 입력해주세요!'}
+          placeholder="댓글을 입력해주세요!"
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
-        <button>
+        <button onClick={handleSubmit}>
           <UpArrowIcon />
         </button>
       </CommentInputWrap>
