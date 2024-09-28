@@ -11,11 +11,21 @@ import CommentInputBox from './CommentInputBox.jsx';
 
 const CommentList = ({ comments }) => {
   const [commentList, setCommentList] = useState(comments);
+  const [newcomment, setNewComment]= useState(null);
   const sheetRef = useRef(null);
 
-  useEffect(()=>{
-    setCommentList(getComment());
-  },[])
+  const addComment = (newComment) => {
+    console.log(newComment);
+    const newCommentData = {
+      profileImg: '', // 기본 이미지 또는 프로필 이미지
+      name: '익명 사용자', // 작성자 이름, 로그인된 유저라면 유저 이름을 사용
+      time: new Date().toLocaleString(), // 현재 시간
+      content: newComment, // 댓글 내용
+    };
+
+    setNewComment(newCommentData);
+  };
+
   return (
     <BottomSheet
       open
@@ -29,14 +39,12 @@ const CommentList = ({ comments }) => {
       ]}
       expandOnContentDrag
       // onSpringEnd={() => setPostListHeight(sheetRef.current?.height || 0)}
-      footer={<CommentInputBox />}
+      footer={<CommentInputBox onSubmit={addComment} />}
     >
       <Container>
         <CommentListContainer>
           <CommentListItemContainer>
-            {/* {commentList.map((data,index)=>(
-              
-            ))} */}
+
             <PostHeaderInfo
               profileImg={''}
               name={'이준석'}
@@ -44,6 +52,16 @@ const CommentList = ({ comments }) => {
             />
             안녕하세요
             <button>답글달기</button>
+            {newcomment&&
+            <>
+              <PostHeaderInfo
+              profileImg={''}
+              name={'익명 사용자'}
+              time={'2024.09.29'}
+              />
+                {newcomment.content}
+              <button>답글달기</button>
+            </>}
           </CommentListItemContainer>
         </CommentListContainer>
       </Container>
