@@ -1,34 +1,49 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { SubTitle } from '../../pages/HomePage/HomePage';
-//testimg
-import OdaibaImage from '../../assets/placeImg/odaiba.jpg';
+// testimg
 import { FaLocationDot } from "react-icons/fa6";
+import { Hplace } from '../../api/Homepage/Hplace';
 
 const HotPlaceGrid = () => {
+  const [apiData, setApiData] = useState([]);
+  const [placeData, setPlaceData] = useState([]);
 
-    const placeData = [
-        { Title: "Title1", sub: "Subtitle1", img: OdaibaImage },
-        { Title: "Title2", sub: "Subtitle2", img: OdaibaImage },
-        { Title: "Title3", sub: "Subtitle3", img: OdaibaImage },
-        { Title: "Title3", sub: "Subtitle3", img: OdaibaImage },
-      ];
-    return (
-        <>
-        <SubTitle>요즘 떠오르는 핫플레이스</SubTitle>
-        <PlaceGrid>
-            {placeData.map((data, index) => (
-            <PlaceItem key={index}>
-                <PlaceImgBox img={data.img} />
-                <PlaceText>
-                <p>{data.Title}</p>
-                <span><FaLocationDot /> {data.sub}</span>
-                </PlaceText>
-            </PlaceItem>
-            ))}
-        </PlaceGrid>
-        </>
-    );
+  useEffect(() => {
+    // API로부터 데이터를 받아와 `placeData`를 업데이트합니다.
+    const fetchData = async () => {
+      const data = await Hplace();
+      setApiData(data.travelogs);  // API 데이터를 상태에 저장
+
+      // `placeData` 업데이트: `travelog` 배열의 `imageUrl`을 사용
+      const updatedPlaceData = data.travelogs.map((item, index) => ({
+        Title: item.title || `Title${index + 1}`,
+        sub: item.placeName || `Subtitle${index + 1}`,
+        img: item.imageUrl || '', // imageUrl을 img로 설정
+      }));
+
+      setPlaceData(updatedPlaceData); // 업데이트된 데이터를 `placeData`로 설정
+    };
+
+    fetchData();
+  }, []);
+
+  return (
+    <>
+      <SubTitle>요즘 떠오르는 핫플레이스</SubTitle>
+      <PlaceGrid>
+        {placeData.map((data, index) => (
+          <PlaceItem key={index}>
+            <PlaceImgBox img={data.img} />
+            <PlaceText>
+              <p>{data.Title}</p>
+              <span><FaLocationDot /> {data.sub}</span>
+            </PlaceText>
+          </PlaceItem>
+        ))}
+      </PlaceGrid>
+    </>
+  );
 };
 
 export default HotPlaceGrid;
@@ -73,15 +88,15 @@ const PlaceText = styled.div`
   }
 
   span {
-    display: flex; /* 아이콘과 텍스트를 한 줄로 정렬 */
-    align-items: center; /* 수직 정렬 */
+    display: flex;
+    align-items: center;
     margin: 0;
     font-size: 12px;
-    color: #8C8D90; /* 텍스트 색상 */
-    gap: 4px; /* 아이콘과 텍스트 사이의 간격 */
+    color: #8C8D90;
+    gap: 4px;
 
     svg {
-      color: #97DF47; /* 아이콘 색상을 녹색으로 설정 */
+      color: #97DF47;
     }
   }
 `;
