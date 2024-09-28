@@ -1,6 +1,6 @@
-import { useRef } from 'react';
-import { Autocomplete } from '@react-google-maps/api';
-import { Input } from '../SearchPage/SearchHeader.jsx';
+import { useRef } from "react";
+import { Autocomplete } from "@react-google-maps/api";
+import { Input } from "../SearchPage/SearchHeader.jsx";
 //
 // const inputStyle = {
 //   boxSizing: 'border-box',
@@ -47,7 +47,7 @@ const SearchInput = ({ handleSearch }) => {
       onPlaceChanged={handlePlaceChanged}
     >
       {/*인풋 컴포넌트 변경 필요*/}
-      <Input type='text' placeholder='여행지, 키워드를 검색해 보세요' />
+      <Input type="text" placeholder="여행지, 키워드를 검색해 보세요" />
     </Autocomplete>
   );
 };
