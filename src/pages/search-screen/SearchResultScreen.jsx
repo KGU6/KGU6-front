@@ -1,19 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import SortPopup from '../../components/SearchPage/SortPopup';
 import DownArrowIcon from '../../assets/icons/down-arrow.svg?react';
 import SearchHeader from '../../components/SearchPage/SearchHeader';
+import { searchApi } from '../../api/searchApi.js';
+import TravelCard from '../../components/MyPage/TravelCard.jsx';
+import { CardList } from '../MyPageScreen.jsx';
 
-const Wrapper = styled.div`
-  width: 100vw;
-  height: 100vh;
-`;
+const Wrapper = styled.div``;
 
 const SearchContainer = styled.div`
-  padding: 20px;
-  width: 100vw;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -55,8 +52,16 @@ const DownArrow = styled(DownArrowIcon)`
 
 const SearchResultScreen = () => {
   const location = useLocation().state;
+  const [placeList, setPlaceList] = useState([]);
 
-  console.log(location);
+  useEffect(() => {
+    (async () => {
+      const response = await searchApi(location.placeName);
+      console.log(location, response);
+
+      setPlaceList(response.travelogs);
+    })();
+  }, []);
 
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [sortOption, setSortOption] = useState('latest');
@@ -93,6 +98,18 @@ const SearchResultScreen = () => {
           setSortOption={handleSortChange}
         />
       )}
+      <CardList isMyPage={false}>
+        {placeList?.length > 0 &&
+          placeList.map((item, index) => (
+            <TravelCard
+              key={index}
+              date={item.createdAt}
+              location={item.placeName}
+              imageUrl={item.imageUrl}
+              title={item.title}
+            />
+          ))}
+      </CardList>
     </SearchContainer>
   );
 };

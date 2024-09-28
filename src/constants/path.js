@@ -5,9 +5,7 @@ export const API_PATH = {
     GET: {
       TRAVELOG_RESENT: VITE_SEVER_URL + '/api/core/travelog?sortBy=latest',
       TRAVELOG_LIKE: VITE_SEVER_URL + '/api/core/travelog?sortBy=likes',
-      TRAVELOG_SEARCH_RESENT:
-        VITE_SEVER_URL +
-        '/api/core/travelog/search?keyword=:query&sortBy=latest',
+      TRAVELOG_SEARCH_RESENT: VITE_SEVER_URL + '/api/core/travelog/search',
       TRAVELOG_SEARCH_LIKE:
         VITE_SEVER_URL +
         '/api/core/travelog/search?keyword=:query&sortBy=likes',

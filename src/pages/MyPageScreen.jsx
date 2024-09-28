@@ -103,14 +103,16 @@ const StatNumber = styled.span`
   margin-top: 5px;
 `;
 
-const CardList = styled.div`
+export const CardList = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
   width: 100%;
   margin: 0 auto;
   background-color: rgba(255, 255, 255, 0.8);
-  padding: 20px;
+
+  padding: ${({ isMyPage }) => (isMyPage ? '20px' : '20px 0')};
+
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
   flex-grow: 1;
@@ -179,7 +181,7 @@ const MyPageScreen = () => {
         expandOnContentDrag
         // onSpringEnd={() => setPostListHeight(sheetRef.current?.height || 0)}
       >
-        <CardList>
+        <CardList isMyPage={true}>
           <TravelCard />
           <TravelCard />
           <TravelCard />

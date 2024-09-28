@@ -67,7 +67,7 @@ const SearchScreen = ({ recentKeywords, setShowSearchPage, addContent }) => {
       setShowSearchPage(false);
     } else {
       navigate('/search-results', {
-        state: { latitude, longitude, placeName, placeAddress },
+        state: { placeName },
       });
     }
   };

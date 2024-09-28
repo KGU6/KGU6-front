@@ -1,10 +1,10 @@
-import styled from "styled-components";
-import LocationIcons from "../../assets/icons/location.svg?react";
-import sampleImage from "../../assets/sampleimg.jpg";
+import styled from 'styled-components';
+import LocationIcons from '../../assets/icons/location.svg?react';
+import sampleImage from '../../assets/sampleimg.jpg';
 
 const Card = styled.div`
   width: 168px;
-  height: 223px;
+  height: 240px;
   background-color: #ffffff;
   border-radius: 20px;
   overflow: hidden;
@@ -55,15 +55,15 @@ const LocationIcon = styled(LocationIcons)`
 
 const TravelCard = ({ imageUrl, location, title, date }) => (
   <Card>
-    <CardImage src={imageUrl || sampleImage} alt={title} />{" "}
+    <CardImage src={imageUrl || sampleImage} alt={'장소이미지'} />{' '}
     {/* 이미지 URL이 없으면 기본 이미지 사용 */}
     <CardContent>
       <Location>
         <LocationIcon />
-        {location || "영국, 런던"}
+        {location || '영국, 런던'}
       </Location>
-      <Title>{title || "런던 숨겨진 명소 여행"}</Title>
-      <Date>{date || "2024.05.28"}</Date>
+      <Title>{title || '런던 숨겨진 명소 여행'}</Title>
+      <Date>{date || '2024.05.28'}</Date>
     </CardContent>
   </Card>
 );
