@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -12,36 +12,37 @@ const tagData = [
   { tag: "모험적인" },
   { tag: "가족" },
   { tag: "동남아" },
+  { tag: "동남아" },
+  { tag: "동남아" },
 ];
 
-const TagSwiper = () => {
-  const [activeTags, setActiveTags] = useState([]); // 다중 태그 선택을 위한 배열
-
+const TagSwiper = ({ selectedTags, setSelectedTags }) => {
+  // 태그 클릭 시 상태 변경
   const handleTagClick = (tag) => {
-    if (activeTags.includes(tag)) {
+    if (selectedTags.includes(tag)) {
       // 이미 활성화된 태그라면 배열에서 제거
-      setActiveTags(activeTags.filter((activeTag) => activeTag !== tag));
+      setSelectedTags(selectedTags.filter((activeTag) => activeTag !== tag));
     } else {
       // 활성화되지 않은 태그라면 배열에 추가
-      setActiveTags([...activeTags, tag]);
+      setSelectedTags([...selectedTags, tag]);
     }
   };
 
   return (
     <SwiperWrapper>
       <Swiper
-        slidesPerView="auto" // 슬라이드의 너비가 자동으로 설정됩니다.
-        spaceBetween={8} // 슬라이드 간 간격을 줄입니다.
+        slidesPerView="auto"
+        spaceBetween={8}
         className="tagSwiper"
-        freeMode={true} // freeMode를 활성화하여 슬라이드가 고정되지 않도록 합니다.
+        freeMode={true}
         modules={[FreeMode]}
+        style={{ width: '390px', height: '34px' }}
         allowTouchMove={true}
-        grabCursor={true} // 슬라이드에 손 모양의 커서가 표시됩니다.
       >
         {tagData.map((tag, index) => (
-          <SwiperSlide key={index} style={{ width: 'auto' }}> {/* 슬라이드 너비를 자동으로 설정 */}
+          <SwiperSlide key={index} style={{ width: 'auto' }}>
             <Keyword
-              active={activeTags.includes(tag.tag)}
+              active={selectedTags.includes(tag.tag)}
               onClick={() => handleTagClick(tag.tag)}
             >
               {tag.tag}
@@ -56,8 +57,11 @@ const TagSwiper = () => {
 export default TagSwiper;
 
 const SwiperWrapper = styled.div`
-  width: 100%;
-  padding: 9px 0px;
+  width: calc(100vw + 40px);
+  min-height: 33px;
+  position: relative;
+  left: -20px;
+  margin-top: 10px;
 `;
 
 const Keyword = styled.div`
