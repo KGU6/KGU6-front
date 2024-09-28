@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -61,6 +61,7 @@ const Card = styled.div`
   border-radius: 20px;
   text-align: center;
   padding: 20px;
+  position: relative;
   height: ${({ isActive }) => (isActive ? "343px" : "276px")}; /* 선택된 슬라이드와 그렇지 않은 슬라이드의 높이 구분 */
   margin-top:${({ isActive }) => (isActive ? "0" : "33.5px")};
   display: flex;
@@ -69,15 +70,24 @@ const Card = styled.div`
   transition: height 0.3s ease-in-out; /* 높이 변경 시 부드럽게 애니메이션 적용 */
 `;
 
-const CardTitle = styled.h3`
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin: 0;
+const CardTitle = styled.span`
+  position:relative;
+  top:68px;
+  font-size: 28px;
+  word-break:keep-all;
+  text-align:left;
+  color: #ffffff;
+  font-weight: var(--weight-bold);
+  margin-bottom: 0;
 `;
 
 const CardDescription = styled.p`
-  font-size: 1rem;
-  color: #666;
+  position:relative;
+  top:78px;
+  font-size: 16px;
+  color: #ffffff;
+  word-break:keep-all;
+  text-align:left;
 `;
 
 const slidesData = [

@@ -11,8 +11,34 @@ import { FaRegBell } from "react-icons/fa6";
 import HomeSwiper from '../../components/homepageSwiper/HomeSwiper';
 import TagSwiper from '../../components/homepageSwiper/TagSwiper';
 import { FreeMode } from 'swiper/modules';
+import { data } from 'autoprefixer';
+//testimg
+import OdaibaImage from '../../assets/placeImg/odaiba.jpg';
 
 const HomePage = () => {
+
+  const placeData=[
+  {
+    Title:"Title1",
+    sub:"Subtitle1",
+    img: OdaibaImage
+  },
+  {
+    Title:"Title2",
+    sub:"Subtitle2",
+    img: OdaibaImage
+  },
+  {
+    Title:"Title3",
+    sub:"Subtitle3",
+    img: OdaibaImage
+  },
+  {
+    Title:"Title3",
+    sub:"Subtitle3",
+    img: OdaibaImage
+  },
+  ];
 
   return (
     <Container>
@@ -43,34 +69,15 @@ const HomePage = () => {
 
       <SubTitle>요즘 떠오르는 핫플레이스</SubTitle>
       <PlaceGrid>
-        <PlaceItem>
-          <PlaceholderBox />
-          <PlaceText>
-            <p>Title</p>
-            <span><FaLocationDot /> Subtitle</span>
-          </PlaceText>
-        </PlaceItem>
-        <PlaceItem>
-          <PlaceholderBox />
-          <PlaceText>
-            <p>Title</p>
-            <span><FaLocationDot /> Subtitle</span>
-          </PlaceText>
-        </PlaceItem>
-        <PlaceItem>
-          <PlaceholderBox />
-          <PlaceText>
-            <p>Title</p>
-            <span><FaLocationDot /> Subtitle</span>
-          </PlaceText>
-        </PlaceItem>
-        <PlaceItem>
-          <PlaceholderBox />
-          <PlaceText>
-            <p>Title</p>
-            <span><FaLocationDot /> Subtitle</span>
-          </PlaceText>
-        </PlaceItem>
+      {placeData.map((data, index) => (
+            <PlaceItem key={index}>
+              <PlaceImgBox img={data.img} />
+              <PlaceText>
+                <p>{data.Title}</p>
+                <span><FaLocationDot /> {data.sub}</span>
+              </PlaceText>
+            </PlaceItem>
+      ))}
       </PlaceGrid>
 
       <KeywordSection>
@@ -85,7 +92,7 @@ const HomePage = () => {
         >
           {[1, 2, 3, 4, 5].map((_, index) => (
             <SwiperSlide key={index}>
-              <KeywordImg />
+              <KeywordImg img={data.img}/>
             </SwiperSlide>
           ))}
         </Swiper>
@@ -170,10 +177,12 @@ const SectionTitle = styled.h2`
   }
 `;
 
-const PlaceholderBox = styled.div`
+const PlaceImgBox = styled.div`
   width: 168px;
   height: 162px;
-  background-color: #bdbdbd;
+  background-image: url(${props => props.img});
+  background-size: cover;
+  background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
