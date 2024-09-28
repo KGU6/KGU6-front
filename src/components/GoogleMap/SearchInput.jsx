@@ -1,23 +1,14 @@
 import { useRef } from "react";
 import { Autocomplete } from "@react-google-maps/api";
-import { Input } from "../SearchPage/SearchHeader.jsx";
 //
-// const inputStyle = {
-//   boxSizing: 'border-box',
-//   border: '1px solid transparent',
-//   width: '80%',
-//   height: '38px',
-//   padding: '0 12px',
-//   borderRadius: '3px',
-//   boxShadow: '0 2px 6px rgba(0, 0, 0, 0.3)',
-//   fontSize: '14px',
-//   outline: 'none',
-//   textOverflow: 'ellipses',
-//   position: 'absolute',
-//   right: '8%',
-//   top: '11px',
-//   marginLeft: '-120px',
-// };
+const inputStyle = {
+  border: "none",
+  outline: "none",
+  flex: "1",
+  fontSize: "13px",
+  backgroundColor: "transparent",
+  width: "45vw",
+};
 
 const SearchInput = ({ handleSearch }) => {
   const autocompleteRef = useRef();
@@ -47,7 +38,11 @@ const SearchInput = ({ handleSearch }) => {
       onPlaceChanged={handlePlaceChanged}
     >
       {/*인풋 컴포넌트 변경 필요*/}
-      <Input type="text" placeholder="여행지, 키워드를 검색해 보세요" />
+      <input
+        type="text"
+        placeholder="여행지, 키워드를 검색해 보세요"
+        style={inputStyle}
+      />
     </Autocomplete>
   );
 };
