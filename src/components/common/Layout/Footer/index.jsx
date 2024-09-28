@@ -26,7 +26,7 @@ const Footer = () => {
         <NavItemContainer path={"/usage-history"}>
           <UsageIcon />
         </NavItemContainer>
-        <NavItemContainer path={"/my-profile"}>
+        <NavItemContainer path={"/mypage"}>
           <ProfileIcon />
         </NavItemContainer>
       </Nav>

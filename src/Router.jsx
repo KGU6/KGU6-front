@@ -7,8 +7,8 @@ import CreatePostPage from "./pages/CreatePostPage.jsx";
 import PostDetailPage from "./pages/PostDetailPage.jsx";
 import SearchScreen from "./pages/search-screen/SearchScreen.jsx";
 import SearchResultScreen from "./pages/search-screen/SearchResultScreen.jsx";
-import HomePage from './pages/HomePage/HomePage';
-import LoginPage from './pages/LoginPage';
+import HomePage from "./pages/HomePage/HomePage";
+import LoginPage from "./pages/LoginPage";
 
 const Router = () => {
   return (
@@ -22,10 +22,10 @@ const Router = () => {
             element={<SearchScreen recentKeywords={["안녕"]} />}
           />
           <Route path="/search-results" element={<SearchResultScreen />} />
-          <Route path='/h' element={<HomePage/>}/>
-          <Route path='/l' element={<LoginPage/>}/>
-          <Route path="/mypage" element={<MyPageScreen />} />
+          <Route path="/h" element={<HomePage />} />
+          <Route path="/l" element={<LoginPage />} />
         </Route>
+        <Route path="/mypage" element={<MyPageScreen />} />
       </Routes>
     </BrowserRouter>
   );
