@@ -6,17 +6,15 @@ import {
   QuillEdi,
 } from './Content.style.js';
 import LocationIcon from '@/assets/icons/location-dot-icon.svg?react';
-import GoodIcon from '@/assets/icons/good-icon.svg?react';
-import NotBadIcon from '@/assets/icons/not-bad-icon.svg?react';
-import BadIcon from '@/assets/icons/bad-icon.svg?react';
+import CloudRedIcon from '@/assets/icons/cloud-red-icon.svg?react';
+import CloudBlueIcon from '@/assets/icons/cloud-blue-icon.svg?react';
+import CloutGrayIcon from '@/assets/icons/cloud-gray-icon.svg?react';
 import { Quill } from 'react-quill';
 import ImageUploader from 'quill-image-uploader';
 
 Quill.register('modules/imageUploader', ImageUploader);
 
 function Content({ id, content, updateContent }) {
-  console.log(content.content);
-
   return (
     <>
       <PlaceContainer>
@@ -31,8 +29,8 @@ function Content({ id, content, updateContent }) {
               }
             }}
           >
-            <GoodIcon />
-          </IconButton>{' '}
+            <CloudRedIcon />
+          </IconButton>
           <IconButton
             $isActive={content.status === 'NOT_BAD'}
             onClick={() => {
@@ -41,7 +39,7 @@ function Content({ id, content, updateContent }) {
               }
             }}
           >
-            <NotBadIcon />
+            <CloudBlueIcon />
           </IconButton>
           <IconButton
             $isActive={content.status === 'BAD'}
@@ -51,7 +49,7 @@ function Content({ id, content, updateContent }) {
               }
             }}
           >
-            <BadIcon />
+            <CloutGrayIcon />
           </IconButton>
         </IconBox>
       </PlaceContainer>

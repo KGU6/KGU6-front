@@ -62,10 +62,10 @@ const GoogleMapCP = ({ placeList }) => {
             icon={{
               url:
                 place.status === 'GOOD'
-                  ? '/src/assets/icons/good-icon.svg'
+                  ? '/src/assets/icons/cloud-red-icon.svg'
                   : place.status === 'NOT_BAD'
-                    ? '/src/assets/icons/not-bad-icon.svg'
-                    : '/src/assets/icons/bad-icon.svg',
+                    ? '/src/assets/icons/cloud-blue-icon.svg'
+                    : '/src/assets/icons/cloud-gray-icon.svg',
             }}
           />
         ))}

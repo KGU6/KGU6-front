@@ -10,6 +10,7 @@ import {
 import Content from '../components/createPost/Content/index.jsx';
 import { useState } from 'react';
 import AddContent from '../components/createPost/AddContent/index.jsx';
+import MainImage from '../components/createPost/MainImage/index.jsx';
 
 const CreatePostPage = () => {
   const [contentList, setContentList] = useState([]);
@@ -36,6 +37,7 @@ const CreatePostPage = () => {
           location: { lat: item.place.lat, lng: item.place.lng },
         }))}
       />
+      <MainImage />
       {contentList.map((item, index) => (
         <Content
           key={index}
