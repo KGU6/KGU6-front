@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import { Pagination } from "swiper/modules";
-import { HSwiper } from "../../api/Homepage/HSwiper";
+import { useEffect, useRef, useState } from 'react';
+import styled from 'styled-components';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { Pagination } from 'swiper/modules';
+import { HSwiper } from '../../api/Homepage/HSwiper';
 
 // App component
 const HomeSwiper = () => {
@@ -17,7 +17,7 @@ const HomeSwiper = () => {
     // API로부터 데이터를 받아와 `placeData`를 업데이트합니다.
     const fetchData = async () => {
       const data = await HSwiper();
-      setApiData(data.travelogs);  // API 데이터를 상태에 저장
+      setApiData(data.travelogs); // API 데이터를 상태에 저장
 
       const updatedPlaceData = data.travelogs.map((item, index) => ({
         Title: item.title || `Title${index + 1}`,
@@ -98,8 +98,8 @@ const Card = styled.div`
   border-radius: 20px;
   text-align: center;
   position: relative;
-  height: ${({ isActive }) => (isActive ? "343px" : "276px")};
-  margin-top: ${({ isActive }) => (isActive ? "0" : "33.5px")};
+  height: ${({ isActive }) => (isActive ? '343px' : '276px')};
+  margin-top: ${({ isActive }) => (isActive ? '0' : '33.5px')};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -125,4 +125,3 @@ const CardDescription = styled.p`
   word-break: keep-all;
   text-align: left;
 `;
-

@@ -11,6 +11,20 @@ export const Title = styled.input`
   padding: 10px;
 `;
 
+export const MainPlaceInput = styled.input`
+  width: 90%;
+
+  margin-bottom: 28px;
+
+  border: 1px solid var(--color-gray-200);
+  border-radius: 10px;
+  padding: 10px;
+
+  &::placeholder {
+    font-size: var(--font-semi-micro);
+  }
+`;
+
 const Button = styled.button`
   line-height: 42px;
 

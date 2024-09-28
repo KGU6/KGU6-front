@@ -1,9 +1,8 @@
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import LeftArrowIcon from "@/assets/icons/left-arrow.svg?react";
-import GlassesIcon from "@/assets/icons/glasses.svg?react";
-import CloseIcon from "@/assets/icons/close.svg?react";
-import SearchInput from "../GoogleMap/SearchInput.jsx";
+import styled from 'styled-components';
+import LeftArrowIcon from '@/assets/icons/left-arrow.svg?react';
+import GlassesIcon from '@/assets/icons/glasses.svg?react';
+import CloseIcon from '@/assets/icons/close.svg?react';
+import SearchInput from '../GoogleMap/SearchInput.jsx';
 
 const SearchBarWrapper = styled.div`
   display: flex;
@@ -56,16 +55,7 @@ export const Input = styled.input`
   width: 45vw;
 `;
 
-const SearchHeader = ({ goBack }) => {
-  const navigate = useNavigate();
-
-  const handleSearch = (latitude, longitude, placeName, placeAddress) => {
-    console.log(latitude, longitude, placeName, placeAddress);
-    navigate("/search-results", {
-      state: { latitude, longitude, placeName, placeAddress },
-    });
-  };
-
+const SearchHeader = ({ goBack, handleSearch }) => {
   return (
     <SearchBarWrapper>
       <LeftArrow onClick={goBack} />

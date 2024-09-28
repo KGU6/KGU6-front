@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+// import React from 'react';
 import { GoogleMap, MarkerF, useJsApiLoader } from '@react-google-maps/api';
+import { useEffect, useState } from 'react';
 
 const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 
@@ -42,34 +43,36 @@ const GoogleMapCP = ({ placeList }) => {
   }, [map, placeList]);
 
   return isLoaded ? (
-    <GoogleMap
-      center={center}
-      mapContainerStyle={containerStyle}
-      zoom={15}
-      onLoad={(map) => {
-        setMap(map);
-      }}
-      onUnmount={() => {
-        setMap(null);
-      }}
-      options={{ disableDefaultUI: true, styles: myStyles }}
-    >
-      {placeList.length > 0 &&
-        placeList.map((place, index) => (
-          <MarkerF
-            key={index}
-            position={place.location}
-            icon={{
-              url:
-                place.status === 'GOOD'
-                  ? '/src/assets/icons/good-icon.svg'
-                  : place.status === 'NOT_BAD'
-                    ? '/src/assets/icons/not-bad-icon.svg'
-                    : '/src/assets/icons/bad-icon.svg',
-            }}
-          />
-        ))}
-    </GoogleMap>
+    <>
+      <GoogleMap
+        center={center}
+        mapContainerStyle={containerStyle}
+        zoom={15}
+        onLoad={(map) => {
+          setMap(map);
+        }}
+        onUnmount={() => {
+          setMap(null);
+        }}
+        options={{ disableDefaultUI: true, styles: myStyles }}
+      >
+        {placeList.length > 0 &&
+          placeList.map((place, index) => (
+            <MarkerF
+              key={index}
+              position={place.location}
+              icon={{
+                url:
+                  place.status === 'RED'
+                    ? '/src/assets/icons/cloud-red-icon.svg'
+                    : place.status === 'BLUE'
+                      ? '/src/assets/icons/cloud-blue-icon.svg'
+                      : '/src/assets/icons/cloud-gray-icon.svg',
+              }}
+            />
+          ))}
+      </GoogleMap>
+    </>
   ) : (
     <></>
   );

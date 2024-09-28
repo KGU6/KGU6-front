@@ -1,7 +1,7 @@
-import { useState } from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import SearchHeader from "../../components/SearchPage/SearchHeader.jsx";
+import { useState } from 'react';
+import styled from 'styled-components';
+import SearchHeader from '../../components/SearchPage/SearchHeader.jsx';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const SearchContainer = styled.div`
   padding: 20px;
@@ -29,10 +29,10 @@ const KeywordList = styled.div`
   flex-wrap: wrap;
 `;
 const Keyword = styled.span`
-  background-color: ${(props) => (props.$recommended ? "#EFFDDE" : "#FFFFFF")};
-  color: ${(props) => (props.$recommended ? "#7BA24F" : "#95989D")};
+  background-color: ${(props) => (props.$recommended ? '#EFFDDE' : '#FFFFFF')};
+  color: ${(props) => (props.$recommended ? '#7BA24F' : '#95989D')};
   border: 1px solid
-    ${(props) => (props.$recommended ? "transparent" : "#BBBEC2")};
+    ${(props) => (props.$recommended ? 'transparent' : '#BBBEC2')};
   border-radius: 30px;
   padding: 8px 15px;
   font-size: 14px;
@@ -41,47 +41,47 @@ const Keyword = styled.span`
   display: inline-block;
 `;
 
-const SearchScreen = ({ recentKeywords }) => {
+const SearchScreen = ({ recentKeywords, setShowSearchPage, addContent }) => {
   const [recommendedKeywords] = useState([
-    "서울",
-    "오스트리아",
-    "오사카",
-    "나트랑",
-    "가을",
-    "제주도",
+    '서울',
+    '오스트리아',
+    '오사카',
+    '나트랑',
+    '가을',
+    '제주도',
   ]);
 
-  // const navigate = useNavigate();
+  const pathname = useLocation().pathname;
+  const navigate = useNavigate();
 
-  /*   const performSearch = async (searchQuery) => {
-    try {
-      const response = await fetch();
-      const data = await response.json();
-      const results = data.items || [];
-
-      onSearchResults(results, searchQuery);
-      navigate("/search-results", { state: { results, query: searchQuery } });
-    } catch (error) {
-      console.error("Error fetching search results", error);
+  const handleSearch = (latitude, longitude, placeName, placeAddress) => {
+    if (pathname !== 'create-post') {
+      addContent({
+        placeName,
+        lat: latitude,
+        lng: longitude,
+        cloud: 'RED',
+        content: '',
+      });
+      setShowSearchPage(false);
+    } else {
+      navigate('/search-results', {
+        state: { latitude, longitude, placeName, placeAddress },
+      });
     }
-  }; */
-
-  /*   const searchHandle = (e) => {
-    e.preventDefault();
-    performSearch(query);
-  }; */
-
-  /*  const handleKeywordClick = (keyword) => {
-    setQuery(keyword);
-    performSearch(keyword);
-  }; */
+  };
 
   return (
     <SearchContainer>
       <SearchHeader
-        /*  onClear={handleClear}
-        onSearch={searchHandle} */
-        goBack={() => window.history.back()}
+        goBack={() => {
+          if (pathname !== 'create-post') {
+            setShowSearchPage(false);
+          } else {
+            window.history.back();
+          }
+        }}
+        handleSearch={handleSearch}
       />
 
       <KeywordContainer>
@@ -101,11 +101,7 @@ const SearchScreen = ({ recentKeywords }) => {
         <KeywordTitle>추천 검색어</KeywordTitle>
         <KeywordList>
           {recommendedKeywords.map((keyword, index) => (
-            <Keyword
-              key={index}
-              $recommended={true}
-              // onClick={() => handleKeywordClick(keyword)}
-            >
+            <Keyword key={index} $recommended={true}>
               {keyword}
             </Keyword>
           ))}
@@ -113,10 +109,6 @@ const SearchScreen = ({ recentKeywords }) => {
       </KeywordContainer>
     </SearchContainer>
   );
-};
-
-SearchScreen.propTypes = {
-  recentKeywords: PropTypes.array.isRequired,
 };
 
 export default SearchScreen;

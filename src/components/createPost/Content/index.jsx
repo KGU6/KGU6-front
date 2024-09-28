@@ -6,58 +6,56 @@ import {
   QuillEdi,
 } from './Content.style.js';
 import LocationIcon from '@/assets/icons/location-dot-icon.svg?react';
-import GoodIcon from '@/assets/icons/good-icon.svg?react';
-import NotBadIcon from '@/assets/icons/not-bad-icon.svg?react';
-import BadIcon from '@/assets/icons/bad-icon.svg?react';
+import CloudRedIcon from '@/assets/icons/cloud-red-icon.svg?react';
+import CloudBlueIcon from '@/assets/icons/cloud-blue-icon.svg?react';
+import CloutGrayIcon from '@/assets/icons/cloud-gray-icon.svg?react';
 import { Quill } from 'react-quill';
 import ImageUploader from 'quill-image-uploader';
 
 Quill.register('modules/imageUploader', ImageUploader);
 
 function Content({ id, content, updateContent }) {
-  console.log(content.content);
-
   return (
     <>
       <PlaceContainer>
         <LocationIcon />
-        {content.place.name}
+        {content.placeName}
         <IconBox>
           <IconButton
-            $isActive={content.status === 'GOOD'}
+            $isActive={content.cloud === 'RED'}
             onClick={() => {
-              if (content.status !== 'GOOD') {
-                updateContent(id, 'status', 'GOOD');
+              if (content.cloud !== 'RED') {
+                updateContent(id, 'cloud', 'RED');
               }
             }}
           >
-            <GoodIcon />
-          </IconButton>{' '}
-          <IconButton
-            $isActive={content.status === 'NOT_BAD'}
-            onClick={() => {
-              if (content.status !== 'NOT_BAD') {
-                updateContent(id, 'status', 'NOT_BAD');
-              }
-            }}
-          >
-            <NotBadIcon />
+            <CloudRedIcon />
           </IconButton>
           <IconButton
-            $isActive={content.status === 'BAD'}
+            $isActive={content.cloud === 'BLUE'}
             onClick={() => {
-              if (content.status !== 'BAD') {
-                updateContent(id, 'status', 'BAD');
+              if (content.cloud !== 'BLUE') {
+                updateContent(id, 'cloud', 'BLUE');
               }
             }}
           >
-            <BadIcon />
+            <CloudBlueIcon />
+          </IconButton>
+          <IconButton
+            $isActive={content.cloud === 'GRAY'}
+            onClick={() => {
+              if (content.cloud !== 'GRAY') {
+                updateContent(id, 'cloud', 'GRAY');
+              }
+            }}
+          >
+            <CloutGrayIcon />
           </IconButton>
         </IconBox>
       </PlaceContainer>
       <QuillEdi
         theme='snow'
-        value={content.value}
+        value={content.content}
         onChange={(content) => {
           updateContent(id, 'content', content);
         }}
