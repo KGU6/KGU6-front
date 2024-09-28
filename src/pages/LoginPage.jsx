@@ -39,7 +39,7 @@ function LoginPage() {
   const goToHome = () => {
     if (validateEmail(username)) {
       setCookie('username', username, 7);
-      navigate('/h');
+      navigate('/');
     }
   };
 
@@ -60,7 +60,6 @@ function LoginPage() {
     const timer = setTimeout(() => {
       setFadeOut(true); // fade-out 시작
       setTimeout(() => {
-        setIsAnimating(false); // 애니메이션 종료
         setIsLogoing(false); // 로고 화면 비활성화
       }, 1000); // fade-out 애니메이션이 끝난 후 로고를 숨김
     }, 1000);
