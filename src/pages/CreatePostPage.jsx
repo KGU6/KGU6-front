@@ -14,6 +14,7 @@ import AddContent from '../components/createPost/AddContent/index.jsx';
 import MainImage from '../components/createPost/MainImage/index.jsx';
 import SearchScreen from './search-screen/SearchScreen.jsx';
 import { PostTravlelog } from '../api/TravlelogApi.js';
+import { useNavigate } from 'react-router-dom';
 
 const CreatePostPage = () => {
   const [title, setTitle] = useState('');
@@ -24,7 +25,7 @@ const CreatePostPage = () => {
   const [keywordList, setKeywordList] = useState([]);
   const [date, setDate] = useState();
   const [showSearchPage, setShowSearchPage] = useState(false);
-
+  const navigate = useNavigate();
   const addContent = (content) => {
     setContentList((prev) => [...prev, content]);
   };
@@ -59,7 +60,7 @@ const CreatePostPage = () => {
     };
 
     const response = await PostTravlelog(data, imgFile);
-
+    navigate('/post/' + response.travelogId);
     console.log(response);
   };
 
