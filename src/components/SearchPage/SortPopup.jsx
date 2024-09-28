@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import CloseIcon from "@/assets/icons/close.svg?react";
 
 const PopupOverlay = styled.div`
   position: fixed;
@@ -16,66 +17,77 @@ const PopupOverlay = styled.div`
 
 const PopupContent = styled.div`
   width: 100%;
-  max-width: 400px;
   background-color: #fff;
   border-radius: 10px 10px 0 0;
   padding: 20px;
   box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 1001;
+  position: relative;
+`;
+
+const TitleWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 `;
 
 const Title = styled.h3`
-  margin-bottom: 20px;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 700%;
+`;
+
+const SortOptionWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 `;
 
 const SortOption = styled.button`
-  background: ${(props) => (props.$active ? "#E5F4DD" : "#fff")};
-  border: 1px solid ${(props) => (props.$active ? "#7BA24F" : "#D3D3D3")};
-  color: ${(props) => (props.$active ? "#7BA24F" : "#000")};
+  border: 1.5px solid ${(props) => (props.$active ? "#97DF47" : "#95989D")};
+  color: ${(props) => (props.$active ? "#97DF47" : "#95989D")};
   border-radius: 25px;
   padding: 10px 20px;
   font-size: 14px;
   cursor: pointer;
-  margin-right: 10px;
+  width: 48%;
+  text-align: center;
 `;
 
-const CloseButton = styled.button`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: transparent;
-  border: none;
-  font-size: 18px;
+const Close = styled(CloseIcon)`
+  width: 24px;
+  height: 24px;
   cursor: pointer;
 `;
 
-const SortPopup = ({ onClose, sortOption, setSortOption }) => {
+const SortPopup = ({ onClear, sortOption, setSortOption }) => {
   return (
     <PopupOverlay>
       <PopupContent>
-        <Title>정렬기준</Title>
-        <CloseButton onClick={onClose}>✖</CloseButton>
-        <SortOption
-          $active={sortOption === "latest"}
-          onClick={() => setSortOption("latest")}
-        >
-          최신순
-        </SortOption>
-        <SortOption
-          $active={sortOption === "relevance"}
-          onClick={() => setSortOption("relevance")}
-        >
-          정확도순
-        </SortOption>
+        <TitleWrapper>
+          <Title>정렬기준</Title>
+          <Close onClick={onClear} />
+        </TitleWrapper>
+        <SortOptionWrapper>
+          <SortOption
+            $active={sortOption === "latest"}
+            onClick={() => setSortOption("latest")}
+          >
+            최신순
+          </SortOption>
+          <SortOption
+            $active={sortOption === "relevance"}
+            onClick={() => setSortOption("relevance")}
+          >
+            정확도순
+          </SortOption>
+        </SortOptionWrapper>
       </PopupContent>
     </PopupOverlay>
   );
 };
 
 SortPopup.propTypes = {
-  onClose: PropTypes.func.isRequired,
+  onClear: PropTypes.func.isRequired,
   sortOption: PropTypes.string.isRequired,
   setSortOption: PropTypes.func.isRequired,
 };

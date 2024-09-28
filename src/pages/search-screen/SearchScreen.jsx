@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import SearchHeader from "../../components/SearchPage/SearchHeader.jsx";
@@ -42,8 +41,7 @@ const Keyword = styled.span`
   display: inline-block;
 `;
 
-const SearchScreen = ({ recentKeywords, onSearchResults }) => {
-  const [query, setQuery] = useState("");
+const SearchScreen = ({ recentKeywords }) => {
   const [recommendedKeywords] = useState([
     "서울",
     "오스트리아",
@@ -53,23 +51,11 @@ const SearchScreen = ({ recentKeywords, onSearchResults }) => {
     "제주도",
   ]);
 
-  const navigate = useNavigate(); // 페이지 이동을 위한 훅
+  // const navigate = useNavigate();
 
-  const handleInputChange = (e) => {
-    setQuery(e.target.value);
-  };
-
-  const handleClear = () => {
-    setQuery("");
-  };
-
-  const performSearch = async (searchQuery) => {
-    const API_KEY = "AIzaSyB1u-E_Afr63fO2N0WMkWizbw33qee2BMQ";
-    const CX = "c38a97b665d464515";
-    const URL = `https://www.googleapis.com/customsearch/v1?key=${API_KEY}&cx=${CX}&q=${searchQuery}`;
-
+  /*   const performSearch = async (searchQuery) => {
     try {
-      const response = await fetch(URL);
+      const response = await fetch();
       const data = await response.json();
       const results = data.items || [];
 
@@ -78,25 +64,23 @@ const SearchScreen = ({ recentKeywords, onSearchResults }) => {
     } catch (error) {
       console.error("Error fetching search results", error);
     }
-  };
+  }; */
 
-  const handleSearch = (e) => {
+  /*   const searchHandle = (e) => {
     e.preventDefault();
     performSearch(query);
-  };
+  }; */
 
-  const handleKeywordClick = (keyword) => {
+  /*  const handleKeywordClick = (keyword) => {
     setQuery(keyword);
     performSearch(keyword);
-  };
+  }; */
 
   return (
     <SearchContainer>
       <SearchHeader
-        query={query}
-        onClear={handleClear}
-        onInputChange={handleInputChange}
-        onSearch={handleSearch}
+        /*  onClear={handleClear}
+        onSearch={searchHandle} */
         goBack={() => window.history.back()}
       />
 
@@ -105,9 +89,7 @@ const SearchScreen = ({ recentKeywords, onSearchResults }) => {
         <KeywordList>
           {recentKeywords?.length > 0 ? (
             recentKeywords.map((keyword, index) => (
-              <Keyword key={index} onClick={() => handleKeywordClick(keyword)}>
-                {keyword}
-              </Keyword>
+              <Keyword key={index}>{keyword}</Keyword>
             ))
           ) : (
             <p>최근 검색어가 없습니다.</p>
@@ -122,7 +104,7 @@ const SearchScreen = ({ recentKeywords, onSearchResults }) => {
             <Keyword
               key={index}
               $recommended={true}
-              onClick={() => handleKeywordClick(keyword)}
+              // onClick={() => handleKeywordClick(keyword)}
             >
               {keyword}
             </Keyword>
@@ -135,7 +117,6 @@ const SearchScreen = ({ recentKeywords, onSearchResults }) => {
 
 SearchScreen.propTypes = {
   recentKeywords: PropTypes.array.isRequired,
-  onSearchResults: PropTypes.func.isRequired,
 };
 
 export default SearchScreen;

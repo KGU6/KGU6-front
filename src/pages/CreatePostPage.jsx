@@ -1,16 +1,16 @@
-import GoogleMapCP from '@/components/GoogleMap/index.jsx';
-import DatePicker from '@/components/createPost/DatePicker.jsx';
-import KeywordList from '@/components/createPost/KeywordList/index.jsx';
+import GoogleMapCP from "@/components/GoogleMap/index.jsx";
+import DatePicker from "@/components/createPost/DatePicker.jsx";
+import KeywordList from "@/components/createPost/KeywordList/index.jsx";
 import {
   Title,
   ButtonBox,
   SaveButton,
   TempSaveButton,
-} from '../components/createPost/createPost.style.js';
-import Content from '../components/createPost/Content/index.jsx';
-import { useState } from 'react';
-import AddContent from '../components/createPost/AddContent/index.jsx';
-import SearchInput from '../components/GoogleMap/SearchInput.jsx';
+} from "../components/createPost/createPost.style.js";
+import Content from "../components/createPost/Content/index.jsx";
+import { useState } from "react";
+import AddContent from "../components/createPost/AddContent/index.jsx";
+import SearchInput from "../components/GoogleMap/SearchInput.jsx";
 
 const CreatePostPage = () => {
   const [contentList, setContentList] = useState([]);
@@ -32,7 +32,7 @@ const CreatePostPage = () => {
 
   return (
     <>
-      <Title placeholder='제목을 입력하세요' />
+      <Title placeholder="제목을 입력하세요" />
       <DatePicker />
       <SearchInput handleSearch={a} />
       <GoogleMapCP
