@@ -15,6 +15,12 @@ import OdaibaImage from '../../assets/placeImg/odaiba.jpg';
 import RecommendPlace from '../../components/homepage/RecommendPlace';
 import HotPlaceGrid from '../../components/homepage/HotPlaceGrid';
 import { useNavigate } from 'react-router-dom';
+//importimg
+import keywordimg1 from '../../assets/homepage/keywordimg/keywordimg1.svg';
+import keywordimg2 from '../../assets/homepage/keywordimg/keywordimg2.svg';
+import keywordimg3 from '../../assets/homepage/keywordimg/keywordimg3.svg';
+import keywordimg4 from '../../assets/homepage/keywordimg/keywordimg4.svg';
+
 
 const HomePage = () => {
   const [selectedTags, setSelectedTags] = useState([]);
@@ -24,12 +30,7 @@ const HomePage = () => {
     navigate('/search');
   };
 
-  const placeData = [
-    { Title: "Title1", sub: "Subtitle1", img: OdaibaImage },
-    { Title: "Title2", sub: "Subtitle2", img: OdaibaImage },
-    { Title: "Title3", sub: "Subtitle3", img: OdaibaImage },
-    { Title: "Title3", sub: "Subtitle3", img: OdaibaImage },
-  ];
+  const keywordImgs = [keywordimg1, keywordimg2, keywordimg3, keywordimg4];
 
   return (
     <Container>
@@ -58,9 +59,9 @@ const HomePage = () => {
             freeMode={true}
             modules={[FreeMode]}
           >
-            {[1, 2, 3, 4, 5].map((_, index) => (
+            {keywordImgs.map((img, index) => (
               <SwiperSlide key={index}>
-                <KeywordImg img={OdaibaImage} />
+                <KeywordImg img={img} />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -181,7 +182,9 @@ const KeywordSection = styled.div`
 const KeywordImg = styled.div`
   width: 232px;
   height: 162px;
-  background-color: #bdbdbd;
+  background-image: url(${props => props.img});
+  background-size: cover;
+  background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;

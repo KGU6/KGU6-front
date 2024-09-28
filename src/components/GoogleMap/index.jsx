@@ -64,10 +64,10 @@ const GoogleMapCP = ({ placeList }) => {
               icon={{
                 url:
                   place.status === 'RED'
-                    ? '/src/assets/icons/cloud-red-icon.svg'
+                    ? '/cloud-red-icon.svg'
                     : place.status === 'BLUE'
-                      ? '/src/assets/icons/cloud-blue-icon.svg'
-                      : '/src/assets/icons/cloud-gray-icon.svg',
+                      ? '/cloud-blue-icon.svg'
+                      : '/cloud-gray-icon.svg',
               }}
             />
           ))}
