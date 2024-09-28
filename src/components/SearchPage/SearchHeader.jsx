@@ -67,13 +67,5 @@ const SearchHeader = ({ goBack, handleSearch }) => {
     </SearchBarWrapper>
   );
 };
-/* 
-SearchHeader.propTypes = {
-  query: PropTypes.string.isRequired,
-  onInputChange: PropTypes.func.isRequired,
-  onSearch: PropTypes.func.isRequired,
-  goBack: PropTypes.func.isRequired,
-  onClear: PropTypes.func.isRequired,
-};
- */
+
 export default SearchHeader;

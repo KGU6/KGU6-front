@@ -1,21 +1,19 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 //icon
-import { RiKakaoTalkFill } from "react-icons/ri";
-import { SiNaver } from "react-icons/si";
-import { FaApple } from "react-icons/fa";
-import { IoMdArrowBack } from "react-icons/io";
+import { RiKakaoTalkFill } from 'react-icons/ri';
+import { SiNaver } from 'react-icons/si';
+import { FaApple } from 'react-icons/fa';
+import { IoMdArrowBack } from 'react-icons/io';
 
 function LoginPage() {
   const [clicked, setIsClicked] = useState(false);
   const [logoing, setIsLogoing] = useState(true);
   const [fadeOut, setFadeOut] = useState(false); // fade-out 상태 추가
-  const [isAnimating, setIsAnimating] = useState(true); // 애니메이션 완료 여부 관리
-  const [username, setUsername] = useState("");  // 아이디 입력값 관리
-  const [password, setPassword] = useState("");  // 비밀번호 입력값 관리
-  const [loginOk, setLoginOk] = useState(null);
-  const [emailWarning, setEmailWarning] = useState(""); // 이메일 경고 메시지
+  const [username, setUsername] = useState(''); // 아이디 입력값 관리
+  const [password, setPassword] = useState(''); // 비밀번호 입력값 관리
+  const [emailWarning, setEmailWarning] = useState(''); // 이메일 경고 메시지
 
   const navigate = useNavigate();
 
@@ -25,7 +23,8 @@ function LoginPage() {
     return emailRegex.test(email); // 이메일 형식이 맞으면 true 반환
   };
 
-  const isButtonActive = username.trim() !== "" && password.trim() !== "" && validateEmail(username); // 이메일 형식과 공백이 아닌 값 체크
+  const isButtonActive =
+    username.trim() !== '' && password.trim() !== '' && validateEmail(username); // 이메일 형식과 공백이 아닌 값 체크
 
   const handleLoginClick = () => {
     setIsClicked(!clicked);
@@ -46,14 +45,14 @@ function LoginPage() {
 
   const handleMouseEnter = () => {
     if (!validateEmail(username)) {
-      setEmailWarning("올바른 이메일 형식이 필요합니다."); // 이메일 경고 메시지 설정
+      setEmailWarning('올바른 이메일 형식이 필요합니다.'); // 이메일 경고 메시지 설정
     } else {
-      setEmailWarning(""); // 이메일 형식이 맞을 경우 경고 메시지 초기화
+      setEmailWarning(''); // 이메일 형식이 맞을 경우 경고 메시지 초기화
     }
   };
 
   const handleMouseLeave = () => {
-    setEmailWarning(""); // 마우스를 떼면 경고 메시지를 없앰
+    setEmailWarning(''); // 마우스를 떼면 경고 메시지를 없앰
   };
 
   // 3초 후 logoing을 false로 설정하며, 그 전에 fade-out 상태로 전환
@@ -72,66 +71,79 @@ function LoginPage() {
   // 초기 로딩 화면에서 fade-out 및 z-index 조정
   return (
     <>
-      {logoing && 
-      <Container className={`second ${fadeOut ? 'fade-out' : ''}`} style={{ zIndex: 999 }}>
-        <img src="../src/assets/login/mainLogo.png" alt="Main Logo" />
-      </Container>}
-      
-      {clicked && 
-      <Container className="second">
-      <button className="arrow" onClick={handleLoginClick}><IoMdArrowBack /></button>
-      <span className="title">로그인</span>
-      <MainWrapper>
-        <LoginForm>
-          <InputWrapper>
-            <input
-              className="idpw"
-              type="text"
-              placeholder="이메일을 입력해주세요"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}  // 아이디 입력값 업데이트
-            />
-            <input
-              className="idpw"
-              type="password"
-              placeholder="비밀번호를 입력해주세요"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}  // 비밀번호 입력값 업데이트
-            />
-          </InputWrapper>
-          <SubmitButton 
-            active={isButtonActive} 
-            onClick={goToHome}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-          >
-            로그인
-          </SubmitButton>
-          {emailWarning && <WarningMessage>{emailWarning}</WarningMessage>} {/* 경고 메시지 출력 */}
-        </LoginForm>
-        <LinksContainer>
-          <Link href="#">아이디 찾기</Link>
-          <span>|</span>
-          <Link href="#">비밀번호 찾기</Link>
-          <Link href="#">회원가입</Link>
-        </LinksContainer>
-      </MainWrapper>
-      <SocialLogin>
-        <span className="menuText">간편 로그인</span>
-        <div className="SBtnWrapper">
-          <SocialButton color="#03c75a"><SiNaver /></SocialButton>
-          <SocialButton color="#fddc3f"><RiKakaoTalkFill /></SocialButton>
-          <SocialButton color="#000000"><FaApple /></SocialButton>
-        </div>
-      </SocialLogin>
-    </Container>
-      }
+      {logoing && (
+        <Container
+          className={`second ${fadeOut ? 'fade-out' : ''}`}
+          style={{ zIndex: 999 }}
+        >
+          <img src='../src/assets/login/mainLogo.png' alt='Main Logo' />
+        </Container>
+      )}
+
+      {clicked && (
+        <Container className='second'>
+          <button className='arrow' onClick={handleLoginClick}>
+            <IoMdArrowBack />
+          </button>
+          <span className='title'>로그인</span>
+          <MainWrapper>
+            <LoginForm>
+              <InputWrapper>
+                <input
+                  className='idpw'
+                  type='text'
+                  placeholder='이메일을 입력해주세요'
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)} // 아이디 입력값 업데이트
+                />
+                <input
+                  className='idpw'
+                  type='password'
+                  placeholder='비밀번호를 입력해주세요'
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)} // 비밀번호 입력값 업데이트
+                />
+              </InputWrapper>
+              <SubmitButton
+                active={isButtonActive}
+                onClick={goToHome}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+              >
+                로그인
+              </SubmitButton>
+              {emailWarning && <WarningMessage>{emailWarning}</WarningMessage>}{' '}
+              {/* 경고 메시지 출력 */}
+            </LoginForm>
+            <LinksContainer>
+              <Link href='#'>아이디 찾기</Link>
+              <span>|</span>
+              <Link href='#'>비밀번호 찾기</Link>
+              <Link href='#'>회원가입</Link>
+            </LinksContainer>
+          </MainWrapper>
+          <SocialLogin>
+            <span className='menuText'>간편 로그인</span>
+            <div className='SBtnWrapper'>
+              <SocialButton color='#03c75a'>
+                <SiNaver />
+              </SocialButton>
+              <SocialButton color='#fddc3f'>
+                <RiKakaoTalkFill />
+              </SocialButton>
+              <SocialButton color='#000000'>
+                <FaApple />
+              </SocialButton>
+            </div>
+          </SocialLogin>
+        </Container>
+      )}
 
       <Container style={{ zIndex: 1 }}>
-        <div className="logoWrapper">
-          <div className="logo">구름으로</div>
-          <div className="logo">기록하는</div>
-          <div className="logo">당신만의 여행기</div>
+        <div className='logoWrapper'>
+          <div className='logo'>구름으로</div>
+          <div className='logo'>기록하는</div>
+          <div className='logo'>당신만의 여행기</div>
         </div>
         <FirstButtonContainer>
           <SignupButton>회원가입</SignupButton>
@@ -156,12 +168,13 @@ const Container = styled.div`
   color: white;
   text-align: center;
   background-image: linear-gradient(
-    to bottom, 
-    rgba(0, 0, 0, 0.38) 38%, 
-    rgba(0, 0, 0, 0.475) 47.5%, 
-    rgba(0, 0, 0, 0.76) 76%, 
-    rgba(0, 0, 0, 0.95) 95%
-  ), url("../src/assets/login/loginbg.jpg");
+      to bottom,
+      rgba(0, 0, 0, 0.38) 38%,
+      rgba(0, 0, 0, 0.475) 47.5%,
+      rgba(0, 0, 0, 0.76) 76%,
+      rgba(0, 0, 0, 0.95) 95%
+    ),
+    url('/src/assets/login/loginbg.jpg');
   background-size: cover;
   background-position: center;
   z-index: 999;
@@ -174,7 +187,7 @@ const Container = styled.div`
     top: 75px;
     height: 20px;
     width: 60px;
-    color: #18191A;
+    color: #18191a;
     font-weight: var(--weight-semi-bold);
   }
 
@@ -191,7 +204,7 @@ const Container = styled.div`
       font-size: 30px;
       font-weight: var(--weight-light);
       &:last-of-type {
-        font-weight: var(--weight-semi-bold)!important;
+        font-weight: var(--weight-semi-bold) !important;
       }
     }
   }
@@ -246,26 +259,26 @@ const Button = styled.button`
 `;
 
 const SignupButton = styled(Button)`
-  background-color: #97DF47;
-  color: #18191A;
+  background-color: #97df47;
+  color: #18191a;
   border: none;
   font-weight: var(--weight-bold);
 `;
 
 const LoginButton = styled(Button)`
   background-color: transparent;
-  color: #9FDD59;
-  border: 0.6px solid #9FDD59;
+  color: #9fdd59;
+  border: 0.6px solid #9fdd59;
   &:hover {
-    background-color: #97DF47;
+    background-color: #97df47;
     color: #ffffff;
   }
 `;
 
 const MainWrapper = styled.div`
   width: 100%;
-  display: flex;       
-  flex-direction: column; 
+  display: flex;
+  flex-direction: column;
   align-items: center;
   position: relative;
   top: 186px;
@@ -336,7 +349,7 @@ const Link = styled.a`
   color: #666;
   text-decoration: none;
   &:hover {
-    color: #97DF47;
+    color: #97df47;
   }
   &:last-of-type {
     text-decoration: underline;
@@ -365,7 +378,7 @@ const SocialLogin = styled.div`
 `;
 
 const SocialButton = styled.button`
-  background: ${({ color }) => color || "#ccc"};
+  background: ${({ color }) => color || '#ccc'};
   width: 47px !important;
   height: 47px !important;
   border-radius: 50%;

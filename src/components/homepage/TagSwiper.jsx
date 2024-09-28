@@ -36,9 +36,9 @@ const TagSwiper = ({ selectedTags, setSelectedTags }) => {
   return (
     <SwiperWrapper>
       <Swiper
-        slidesPerView="auto"
+        slidesPerView='auto'
         spaceBetween={8}
-        className="tagSwiper"
+        className='tagSwiper'
         freeMode={true}
         modules={[FreeMode]}
         style={{ width: '390px', height: '34px' }}
@@ -71,7 +71,8 @@ const SwiperWrapper = styled.div`
 
 const Keyword = styled.div`
   padding: 8px 16px;
-  background-color: ${({ active }) => (active ? 'var(--color-main)' : 'transparent')};
+  background-color: ${({ active }) =>
+    active ? 'var(--color-main)' : 'transparent'};
   color: ${({ active }) => (active ? 'white' : 'var(--color-main)')};
   border-radius: 20px;
   border: solid 1px var(--color-main);

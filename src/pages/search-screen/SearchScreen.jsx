@@ -52,10 +52,11 @@ const SearchScreen = ({ recentKeywords, setShowSearchPage, addContent }) => {
   ]);
 
   const pathname = useLocation().pathname;
+
   const navigate = useNavigate();
 
   const handleSearch = (latitude, longitude, placeName, placeAddress) => {
-    if (pathname !== 'create-post') {
+    if (pathname === '/create-post') {
       addContent({
         placeName,
         lat: latitude,
