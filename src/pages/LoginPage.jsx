@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 //icon
 import { RiKakaoTalkFill } from "react-icons/ri";
 import { SiNaver } from "react-icons/si";
@@ -8,21 +9,40 @@ import { IoMdArrowBack } from "react-icons/io";
 
 function LoginPage() {
   const [clicked, setIsClicked] = useState(false);
+  const [logoing, setIsLogoing] = useState(true);
+  const [fadeOut, setFadeOut] = useState(false); // fade-out 상태 추가
+  const [isAnimating, setIsAnimating] = useState(true); // 애니메이션 완료 여부 관리
   const [username, setUsername] = useState("");  // 아이디 입력값 관리
   const [password, setPassword] = useState("");  // 비밀번호 입력값 관리
 
-  // 로그인 버튼 활성화 상태를 관리
   const isButtonActive = username.trim() !== "" && password.trim() !== "";
+  const navigate = useNavigate();
 
   const handleLoginClick = () => {
     setIsClicked(!clicked);
   };
 
-  // clicked가 true일 때 로그인 폼 렌더링
-  if (clicked) {
+  const goToHome = () => {
+    navigate('/h');
+  };
+
+  // 3초 후 logoing을 false로 설정하며, 그 전에 fade-out 상태로 전환
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setFadeOut(true); // fade-out 시작
+      setTimeout(() => {
+        setIsAnimating(false); // 애니메이션 종료
+        setIsLogoing(false); // 로고 화면 비활성화
+      }, 1000); // fade-out 애니메이션이 끝난 후 로고를 숨김
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!logoing && clicked) {
     return (
       <Container className="second">
-        <button className="arrow" onClick={handleLoginClick}><IoMdArrowBack/></button>
+        <button className="arrow" onClick={handleLoginClick}><IoMdArrowBack /></button>
         <span className="title">로그인</span>
         <MainWrapper>
           <LoginForm>
@@ -42,8 +62,7 @@ function LoginPage() {
                 onChange={(e) => setPassword(e.target.value)}  // 비밀번호 입력값 업데이트
               />
             </InputWrapper>
-            {/* 버튼 활성화 상태에 따라 색상 변경 */}
-            <SubmitButton active={isButtonActive}>로그인</SubmitButton>
+            <SubmitButton active={isButtonActive} onClick={goToHome}>로그인</SubmitButton>
           </LoginForm>
           <LinksContainer>
             <Link href="#">아이디 찾기</Link>
@@ -55,38 +74,59 @@ function LoginPage() {
         <SocialLogin>
           <span className="menuText">간편 로그인</span>
           <div className="SBtnWrapper">
-            <SocialButton color="#03c75a"><SiNaver/></SocialButton>
-            <SocialButton color="#fddc3f"><RiKakaoTalkFill/></SocialButton>
-            <SocialButton color="#000000"><FaApple/></SocialButton>
+            <SocialButton color="#03c75a"><SiNaver /></SocialButton>
+            <SocialButton color="#fddc3f"><RiKakaoTalkFill /></SocialButton>
+            <SocialButton color="#000000"><FaApple /></SocialButton>
           </div>
         </SocialLogin>
       </Container>
     );
   }
 
-  // clicked가 false일 때 기존 로그인 화면 렌더링
+  // if (!logoing) {
+  //   return (
+  //     <Container>
+  //       <div className="logoWrapper">
+  //         <div className="logo">구름으로</div>
+  //         <div className="logo">기록하는</div>
+  //         <div className="logo">당신만의 여행기</div>
+  //       </div>
+  //       <FirstButtonContainer>
+  //         <SignupButton>회원가입</SignupButton>
+  //         <LoginButton onClick={handleLoginClick}>로그인</LoginButton>
+  //       </FirstButtonContainer>
+  //     </Container>
+  //   );
+  // }
+
+  // 초기 로딩 화면에서 fade-out 및 z-index 조정
   return (
-    <Container>
-      <div className="logoWrapper">
-        <div className="logo">구름으로</div>
-        <div className="logo">기록하는</div>
-        <div className="logo">당신만의 여행기</div>
-      </div>
-      <FirstButtonContainer>
-        <SignupButton>회원가입</SignupButton>
-        <LoginButton onClick={handleLoginClick}>로그인</LoginButton>
-      </FirstButtonContainer>
-    </Container>
+    <>{logoing&&
+      <Container className={`second ${fadeOut ? 'fade-out' : ''}`} style={{ zIndex: 999 }}>
+        <img src="../src/assets/login/mainLogo.png" alt="Main Logo" />
+      </Container>}
+      <Container style={{ zIndex: -1 }}>
+        <div className="logoWrapper">
+          <div className="logo">구름으로</div>
+          <div className="logo">기록하는</div>
+          <div className="logo">당신만의 여행기</div>
+        </div>
+        <FirstButtonContainer>
+          <SignupButton>회원가입</SignupButton>
+          <LoginButton onClick={handleLoginClick}>로그인</LoginButton>
+        </FirstButtonContainer>
+      </Container>
+    </>
   );
 }
 
 export default LoginPage;
 
-// 스타일 컴포넌트 설정 - 백틱 추가
+// styled-components
 const Container = styled.div`
   display: flex;
   position: absolute;
-  left:0;
+  left: 0;
   flex-direction: column;
   align-items: center;
   width: 390px;
@@ -99,9 +139,12 @@ const Container = styled.div`
     rgba(0, 0, 0, 0.475) 47.5%, 
     rgba(0, 0, 0, 0.76) 76%, 
     rgba(0, 0, 0, 0.95) 95%
-  ), url("../src/assets/loginbg.jpg");
+  ), url("../src/assets/login/loginbg.jpg");
   background-size: cover;
   background-position: center;
+  z-index: 999;
+  transition: z-index 0.5s ease-out; /* z-index 변경 애니메이션 */
+
   .title {
     position: absolute;
     font-size: 18px;
@@ -112,6 +155,7 @@ const Container = styled.div`
     color: #18191A;
     font-weight: var(--weight-semi-bold);
   }
+
   .logoWrapper {
     display: flex;
     gap: 20px;
@@ -129,17 +173,33 @@ const Container = styled.div`
       }
     }
   }
+
   .arrow {
     font-size: 25px;
     color: #8c8d90;
-    background-color:transparent;
+    background-color: transparent;
     position: absolute;
     left: 19px;
     top: 71px;
-    padding:0;
+    padding: 0;
   }
+
   &.second {
+    background-color: white;
     background-image: none;
+    img {
+      position: absolute;
+      top: 378px;
+      width: 160px;
+      height: 37px;
+      margin: 0 auto;
+    }
+  }
+
+  // fade-out 애니메이션
+  &.fade-out {
+    opacity: 0;
+    transition: opacity 1s ease-out;
   }
 `;
 
