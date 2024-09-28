@@ -19,9 +19,10 @@ const KeywordContainer = styled.div`
 `;
 
 const KeywordTitle = styled.h3`
-  margin-bottom: 8px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   font-size: 18px;
-  font-weight: 800;
+  font-weight: 600;
 `;
 
 const KeywordList = styled.div`
