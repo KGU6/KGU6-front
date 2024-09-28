@@ -119,8 +119,6 @@ const CardTitle = styled.span`
   color: #ffffff;
   font-weight: var(--weight-bold);
   margin-bottom: 0;
-  //임시
-  -webkit-text-stroke: 2px black;
 `;
 
 const CardDescription = styled.p`
