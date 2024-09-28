@@ -85,7 +85,8 @@ export default LoginPage;
 // 스타일 컴포넌트 설정 - 백틱 추가
 const Container = styled.div`
   display: flex;
-  position: relative;
+  position: absolute;
+  left:0;
   flex-direction: column;
   align-items: center;
   width: 390px;
