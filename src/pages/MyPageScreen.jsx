@@ -1,8 +1,9 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import Footer from "../components/common/Layout/Footer";
 import { BottomSheet } from "react-spring-bottom-sheet";
 import TravelCard from "../components/MyPage/TravelCard";
+import { getProfile } from "../api/userApi";
 
 const GradientBackground = styled.div`
   height: 100vh;
@@ -119,15 +120,20 @@ const CardList = styled.div`
 const MyPageScreen = () => {
   const [profileImage, setProfileImage] = useState(null);
   const sheetRef = useRef(null);
-  // 파일 업로드가 발생했을 때 처리하는 함수
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
-      // 이미지 미리보기 URL 생성
       const imageUrl = URL.createObjectURL(file);
       setProfileImage(imageUrl);
     }
   };
+
+  useEffect(() => {
+    (async () => {
+      const response = await getProfile();
+      console.log(response);
+    })();
+  }, []);
 
   return (
     <GradientBackground>
