@@ -6,14 +6,34 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { SubTitle } from '../../pages/HomePage/HomePage';
-import { Rplace } from '../../api/Rplace';
+// import { Rplace } from '../../api/Homepage/Rplace';
+
+// 이미지 파일을 import로 불러오기
+import circle1 from '../../assets/homepage/circle/circle1.svg';
+import circle2 from '../../assets/homepage/circle/circle2.svg';
+import circle3 from '../../assets/homepage/circle/circle3.svg';
+import circle4 from '../../assets/homepage/circle/circle4.svg';
+import circle5 from '../../assets/homepage/circle/circle5.svg';
+import circle6 from '../../assets/homepage/circle/circle6.svg';
+import circle7 from '../../assets/homepage/circle/circle7.svg';
+import circle8 from '../../assets/homepage/circle/circle8.svg';
+import circle9 from '../../assets/homepage/circle/circle9.svg';
+import circle10 from '../../assets/homepage/circle/circle10.svg';
 
 const RecommendPlace = () => {
-    const[apiData,setApiData]=useState(null);
 
-    useEffect(()=>{
-        setApiData(Rplace());
-    },[])
+    const circleImgList = [
+        { img: circle1 },
+        { img: circle2 },
+        { img: circle3 },
+        { img: circle4 },
+        { img: circle5 },
+        { img: circle6 },
+        { img: circle7 },
+        { img: circle8 },
+        { img: circle9 },
+        { img: circle10 },
+    ];
 
     return (
         <>
@@ -27,9 +47,9 @@ const RecommendPlace = () => {
                     allowTouchMove={true}
                     grabCursor={true}
                 >
-                    {[1, 2, 3, 4, 5, 6, 7, 8].map((_, index) => (
+                    {circleImgList.map((circle, index) => (
                         <SwiperSlide key={index}>
-                            <CircleItem>aa</CircleItem>
+                            <CircleItem img={circle.img} />
                         </SwiperSlide>
                     ))}
                 </Swiper>
@@ -53,8 +73,10 @@ const CircleItem = styled.div`
   text-align: center;
   font-size: 14px;
   font-weight: var(--weight-semi-bold);
-  color:white;
-  background-image:url();
+  color: white;
+  background-image: url(${props => props.img});
+  background-size: cover; /* 이미지가 원형에 맞게 커버되도록 설정 */
+  background-position: center; /* 이미지가 중앙에 위치하도록 설정 */
   display: flex;
   justify-content: center;
   align-items: center; /* 원의 정중앙에 텍스트 배치 */

@@ -6,7 +6,6 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 // icon
 import { IoSearchOutline } from "react-icons/io5";
-import { FaLocationDot } from "react-icons/fa6";
 import { FaRegBell } from "react-icons/fa6";
 import HomeSwiper from '../../components/homepage/HomeSwiper';
 import TagSwiper from '../../components/homepage/TagSwiper';
@@ -47,8 +46,8 @@ const HomePage = () => {
         </div>
         <div className='SwiperWrapper'>
           <Swiper
-            slidesPerView={1.4}
-            spaceBetween={8} // 각 슬라이드 간 간격
+            slidesPerView={1.6}
+            spaceBetween={4} // 각 슬라이드 간 간격
             className="tagImgSwiper"
             freeMode={true}
             modules={[FreeMode]}
