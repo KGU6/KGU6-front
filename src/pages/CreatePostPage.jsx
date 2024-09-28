@@ -11,6 +11,7 @@ import Content from '../components/createPost/Content/index.jsx';
 import { useState } from 'react';
 import AddContent from '../components/createPost/AddContent/index.jsx';
 import MainImage from '../components/createPost/MainImage/index.jsx';
+import SearchScreen from './search-screen/SearchScreen.jsx';
 
 const CreatePostPage = () => {
   const [title, setTitle] = useState('');
@@ -19,17 +20,33 @@ const CreatePostPage = () => {
   const [keywordList, setKeywordList] = useState([]);
   const [date, setDate] = useState();
 
+  const [showSearchPage, setShowSearchPage] = useState(false);
+
   const addContent = (content) => {
     setContentList((prev) => [...prev, content]);
   };
 
+  const showSearchPageHandle = () => {
+    setShowSearchPage(true);
+  };
+
   const updateContent = (id, key, data) => {
     setContentList((prevContentList) =>
-      prevContentList.map((content) =>
-        content.id === id ? { ...content, [key]: data } : content
+      prevContentList.map((content, index) =>
+        index === id ? { ...content, [key]: data } : content
       )
     );
   };
+
+  if (showSearchPage) {
+    return (
+      <SearchScreen
+        recentKeywords={[]}
+        setShowSearchPage={setShowSearchPage}
+        addContent={addContent}
+      />
+    );
+  }
 
   return (
     <>
@@ -57,7 +74,7 @@ const CreatePostPage = () => {
           updateContent={updateContent}
         />
       ))}
-      <AddContent addContent={addContent} />
+      <AddContent addContent={showSearchPageHandle} />
       <KeywordList keywordList={keywordList} setKeywordList={setKeywordList} />
       <ButtonBox>
         <TempSaveButton>임시저장</TempSaveButton>
