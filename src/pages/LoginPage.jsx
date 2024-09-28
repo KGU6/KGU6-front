@@ -6,6 +6,7 @@ import { RiKakaoTalkFill } from "react-icons/ri";
 import { SiNaver } from "react-icons/si";
 import { FaApple } from "react-icons/fa";
 import { IoMdArrowBack } from "react-icons/io";
+import { login } from "../api/login";
 
 function LoginPage() {
   const [clicked, setIsClicked] = useState(false);
@@ -14,6 +15,7 @@ function LoginPage() {
   const [isAnimating, setIsAnimating] = useState(true); // 애니메이션 완료 여부 관리
   const [username, setUsername] = useState("");  // 아이디 입력값 관리
   const [password, setPassword] = useState("");  // 비밀번호 입력값 관리
+  const [loginOk,setLoginOk]=useState(null);
 
   const isButtonActive = username.trim() !== "" && password.trim() !== "";
   const navigate = useNavigate();
@@ -23,6 +25,7 @@ function LoginPage() {
   };
 
   const goToHome = () => {
+    setLoginOk(login(username));
     navigate('/h');
   };
 
@@ -34,70 +37,10 @@ function LoginPage() {
         setIsAnimating(false); // 애니메이션 종료
         setIsLogoing(false); // 로고 화면 비활성화
       }, 1000); // fade-out 애니메이션이 끝난 후 로고를 숨김
-    }, 3000);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);
-
-  if (!logoing && clicked) {
-    return (
-      <Container className="second">
-        <button className="arrow" onClick={handleLoginClick}><IoMdArrowBack /></button>
-        <span className="title">로그인</span>
-        <MainWrapper>
-          <LoginForm>
-            <InputWrapper>
-              <input
-                className="idpw"
-                type="text"
-                placeholder="아이디를 입력해주세요"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}  // 아이디 입력값 업데이트
-              />
-              <input
-                className="idpw"
-                type="password"
-                placeholder="비밀번호를 입력해주세요"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}  // 비밀번호 입력값 업데이트
-              />
-            </InputWrapper>
-            <SubmitButton active={isButtonActive} onClick={goToHome}>로그인</SubmitButton>
-          </LoginForm>
-          <LinksContainer>
-            <Link href="#">아이디 찾기</Link>
-            <span>|</span>
-            <Link href="#">비밀번호 찾기</Link>
-            <Link href="#">회원가입</Link>
-          </LinksContainer>
-        </MainWrapper>
-        <SocialLogin>
-          <span className="menuText">간편 로그인</span>
-          <div className="SBtnWrapper">
-            <SocialButton color="#03c75a"><SiNaver /></SocialButton>
-            <SocialButton color="#fddc3f"><RiKakaoTalkFill /></SocialButton>
-            <SocialButton color="#000000"><FaApple /></SocialButton>
-          </div>
-        </SocialLogin>
-      </Container>
-    );
-  }
-
-  // if (!logoing) {
-  //   return (
-  //     <Container>
-  //       <div className="logoWrapper">
-  //         <div className="logo">구름으로</div>
-  //         <div className="logo">기록하는</div>
-  //         <div className="logo">당신만의 여행기</div>
-  //       </div>
-  //       <FirstButtonContainer>
-  //         <SignupButton>회원가입</SignupButton>
-  //         <LoginButton onClick={handleLoginClick}>로그인</LoginButton>
-  //       </FirstButtonContainer>
-  //     </Container>
-  //   );
-  // }
 
   // 초기 로딩 화면에서 fade-out 및 z-index 조정
   return (
@@ -105,7 +48,48 @@ function LoginPage() {
       <Container className={`second ${fadeOut ? 'fade-out' : ''}`} style={{ zIndex: 999 }}>
         <img src="../src/assets/login/mainLogo.png" alt="Main Logo" />
       </Container>}
-      <Container style={{ zIndex: -1 }}>
+      {clicked&&
+      <Container className="second">
+      <button className="arrow" onClick={handleLoginClick}><IoMdArrowBack /></button>
+      <span className="title">로그인</span>
+      <MainWrapper>
+        <LoginForm>
+          <InputWrapper>
+            <input
+              className="idpw"
+              type="text"
+              placeholder="아이디를 입력해주세요"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}  // 아이디 입력값 업데이트
+            />
+            <input
+              className="idpw"
+              type="password"
+              placeholder="비밀번호를 입력해주세요"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}  // 비밀번호 입력값 업데이트
+            />
+          </InputWrapper>
+          <SubmitButton active={isButtonActive} onClick={goToHome}>로그인</SubmitButton>
+        </LoginForm>
+        <LinksContainer>
+          <Link href="#">아이디 찾기</Link>
+          <span>|</span>
+          <Link href="#">비밀번호 찾기</Link>
+          <Link href="#">회원가입</Link>
+        </LinksContainer>
+      </MainWrapper>
+      <SocialLogin>
+        <span className="menuText">간편 로그인</span>
+        <div className="SBtnWrapper">
+          <SocialButton color="#03c75a"><SiNaver /></SocialButton>
+          <SocialButton color="#fddc3f"><RiKakaoTalkFill /></SocialButton>
+          <SocialButton color="#000000"><FaApple /></SocialButton>
+        </div>
+      </SocialLogin>
+    </Container>
+      }
+      <Container style={{ zIndex: 1 }}>
         <div className="logoWrapper">
           <div className="logo">구름으로</div>
           <div className="logo">기록하는</div>

@@ -18,49 +18,50 @@ const HomeSwiper = () => {
   };
 
   return (
-    <SwiperContainer>
-      <Swiper
+      <SwiperContainer>
+        <Swiper
         pagination={{ clickable: true }}
-        spaceBetween={30} // 슬라이드 간 간격
-        slidesPerView={1.3} // 슬라이드의 일부분을 보여주기 위해 1보다 큰 값 설정
-        centeredSlides // 선택된 슬라이드를 중앙에 위치시킴
-        loop // 슬라이드가 무한히 반복되도록 설정
+        spaceBetween={50} 
+        slidesPerView={1.5} 
+        centeredSlides
+        loop
         modules={[Pagination]}
-        style={{ height: '373px' }} // Swiper의 높이를 직접 설정
-        onSlideChange={handleSlideChange} // 슬라이드 변경 시 이벤트 핸들러
-        ref={swiperRef} // Swiper에 대한 참조
-      >
-        {slidesData.map((slide, index) => (
-          <SwiperSlide key={index}>
-            <Card isActive={index === activeIndex}>
-              <CardTitle>{slide.title}</CardTitle>
-              <CardDescription>{slide.description}</CardDescription>
-            </Card>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </SwiperContainer>
+        style={{ height: '373px', width: '100%', margin: '0 auto' }} // Swiper의 넓이를 100%로 설정
+        onSlideChange={handleSlideChange}
+        ref={swiperRef}
+        >
+
+          {slidesData.map((slide, index) => (
+            <SwiperSlide key={index}>
+              <Card isActive={index === activeIndex}>
+                <CardTitle>{slide.title}</CardTitle>
+                <CardDescription>{slide.description}</CardDescription>
+              </Card>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </SwiperContainer>
   );
 };
 
 export default HomeSwiper;
 
 const SwiperContainer = styled.div`
-  width:100%;
+  width:100%; /* 부모 요소의 좌우 패딩이 20px씩 있다고 가정 */
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right:10px;
-  z-index:10;
+  position: relative; /* 절대적으로 배치되지 않도록 상대적 배치를 사용 */
 `;
+
 
 const Card = styled.div`
   background-color: #f0f0f0; /* 회색 배경색 */
   width: 273px;
+  padding:20px;
   border-radius: 20px;
   text-align: center;
-  padding: 20px;
   position: relative;
   height: ${({ isActive }) => (isActive ? "343px" : "276px")}; /* 선택된 슬라이드와 그렇지 않은 슬라이드의 높이 구분 */
   margin-top:${({ isActive }) => (isActive ? "0" : "33.5px")};
