@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -6,16 +7,21 @@ import 'swiper/css/free-mode';
 import { FreeMode } from 'swiper/modules';
 
 const tagData = [
-  { tag: '휴식' },
-  { tag: '식도락' },
-  { tag: '모험적인' },
-  { tag: '가족' },
-  { tag: '동남아' },
-  { tag: '동남아' },
-  { tag: '동남아' },
+  { tag: "휴식" },
+  { tag: "식도락" },
+  { tag: "모험적인" },
+  { tag: "가족" },
+  { tag: "동남아" },
+  { tag: "북유럽" },
 ];
 
 const TagSwiper = ({ selectedTags, setSelectedTags }) => {
+
+  useEffect(() => {
+    if (selectedTags.length === 0) {
+      setSelectedTags([tagData[0].tag]);
+    }
+  }, [setSelectedTags, selectedTags]);
   // 태그 클릭 시 상태 변경
   const handleTagClick = (tag) => {
     if (selectedTags.includes(tag)) {
