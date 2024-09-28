@@ -1,13 +1,20 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
+import Footer from "../components/common/Layout/Footer";
+import { BottomSheet } from "react-spring-bottom-sheet";
+import TravelCard from "../components/MyPage/TravelCard";
+import { getProfile } from "../api/userApi";
 import LocationIconSrc from "@/assets/icons/location.svg";
 
+
 const GradientBackground = styled.div`
+  height: 100vh;
   background: radial-gradient(circle, #a7e661, #dff6c5);
   min-height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* 남은 공간을 채우기 위한 설정 */
+  justify-content: space-between;
 `;
 
 const ProfileSection = styled.div`
@@ -48,6 +55,7 @@ const HiddenFileInput = styled.input`
 `;
 
 const ProfileName = styled.h1`
+  padding-top: 20px;
   font-size: 24px;
   font-weight: 700;
   margin-bottom: 20px;
@@ -88,10 +96,11 @@ const StatLabel = styled.span`
   font-size: 16px;
   font-weight: 600;
   color: #7b7b7b;
+  margin-bottom: 10px;
 `;
 
 const StatNumber = styled.span`
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 700;
   margin-top: 5px;
 `;
@@ -100,73 +109,33 @@ const CardList = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
   background-color: rgba(255, 255, 255, 0.8);
   padding: 20px;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
-  flex-grow: 1; /* 남은 공간을 차지 */
-  overflow-y: auto; /* 콘텐츠가 많을 경우 스크롤 처리 */
-`;
-
-const Card = styled.div`
-  width: 40vw;
-  height: 30vh;
-  background-color: #ffffff;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-`;
-
-const CardImage = styled.img`
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-`;
-
-const CardTextContainer = styled.div`
-  padding: 10px;
-`;
-
-const Location = styled.div`
-  display: flex;
-  align-items: center;
-  font-size: 16px;
-  color: #525252;
-  font-weight: 500;
-`;
-
-const LocationIcon = styled.img`
-  width: 12px;
-  height: 12px;
-  margin-right: 5px;
-`;
-
-const Title = styled.h3`
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 5px;
-  color: #000;
-`;
-
-const Date = styled.div`
-  font-size: 16px;
-  color: #7b7b7b;
+  flex-grow: 1;
+  overflow-y: auto;
 `;
 
 const MyPageScreen = () => {
   const [profileImage, setProfileImage] = useState(null);
-
-  // 파일 업로드가 발생했을 때 처리하는 함수
+  const sheetRef = useRef(null);
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
-      // 이미지 미리보기 URL 생성
       const imageUrl = URL.createObjectURL(file);
       setProfileImage(imageUrl);
     }
   };
+
+  useEffect(() => {
+    (async () => {
+      const response = await getProfile();
+      console.log(response);
+    })();
+  }, []);
 
   return (
     <GradientBackground>
@@ -200,23 +169,27 @@ const MyPageScreen = () => {
       </ProfileSection>
 
       {/* 카드 리스트 */}
-      <CardList>
-        <Card>
-          <CardImage
-            src="https://via.placeholder.com/300x150"
-            alt="Card Image"
-          />
-          <CardTextContainer>
-            <Location>
-              <LocationIcon src={LocationIconSrc} alt="Location icon" />
-              영국, 런던
-            </Location>
-            <Title>런던 숨겨진 명소 여행</Title>
-            <Date>2024.05.28</Date>
-          </CardTextContainer>
-        </Card>
-        {/* 다른 카드들 추가 */}
-      </CardList>
+      <BottomSheet
+        open
+        blocking={false}
+        ref={sheetRef}
+        defaultSnap={() => 80}
+        snapPoints={({ maxHeight }) => [
+          Math.floor(maxHeight * 0.95),
+          Math.floor(maxHeight * 0.55),
+        ]}
+        expandOnContentDrag
+        // onSpringEnd={() => setPostListHeight(sheetRef.current?.height || 0)}
+      >
+        <CardList>
+          <TravelCard />
+          <TravelCard />
+          <TravelCard />
+          <TravelCard />
+        </CardList>
+      </BottomSheet>
+
+      <Footer />
     </GradientBackground>
   );
 };
